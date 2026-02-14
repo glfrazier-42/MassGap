@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+# LaTeX build artifacts
+latex-paper/*.aux
+latex-paper/*.bbl
+latex-paper/*.blg
+latex-paper/*.log
+latex-paper/*.out
+latex-paper/*.toc
+latex-paper/*.fdb_latexmk
+latex-paper/*.fls
+latex-paper/*.synctex.gz
+
+# Generated results (regenerate from scripts)
+results/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*~
+.vscode/
