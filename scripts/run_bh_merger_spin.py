@@ -597,7 +597,7 @@ def main():
     # ANALYSIS 6: Spin Efficiency — Deficit per Unit m2 vs q
     # ==================================================================
     print(f"\n{'=' * 78}")
-    print("ANALYSIS 6: Spin Efficiency — Does Low q Deposit More Spin per m2?")
+    print("ANALYSIS 6: Spin Efficiency -- Does Low q Deposit More Spin per m2?")
     print(f"{'=' * 78}")
     print()
     print("Physical prediction: in a lopsided merger (low q), the small m2")
@@ -673,7 +673,7 @@ def main():
                 print("    WARNING: chi_eff correlates with q.")
                 print("    The excess could be from progenitor spin, not geometry.")
             else:
-                print("    No correlation — the excess is NOT from progenitor spin.")
+                print("    No correlation -- the excess is NOT from progenitor spin.")
 
         # Binned analysis with finer bins
         q_bin_edges = [0.15, 0.35, 0.50, 0.60, 0.70, 0.80, 0.95]

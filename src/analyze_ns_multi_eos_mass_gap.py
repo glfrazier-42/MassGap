@@ -60,7 +60,7 @@ NS_EOS_LIST = {
     }
 }
 
-# B values to test (MeV/fm³) - only for neutron mode
+# B values to test (MeV/fm^3) - only for neutron mode
 B_VALUES = [50, 60, 70]
 
 # Constants
@@ -117,7 +117,7 @@ def analyze_star(name, eos_file, base_dir, mode='neutron', P_transition=1.0e35):
     print(f"ANALYZING {mode_label}: {name}")
     print(f"{'='*70}")
     
-    eos_path = base_dir / 'data' / 'eos_tables' / eos_file
+    eos_path = base_dir / 'data' / 'eos' / eos_file
     if not eos_path.exists():
         print(f"[X] File not found: {eos_file}")
         return None
@@ -196,10 +196,10 @@ def analyze_star(name, eos_file, base_dir, mode='neutron', P_transition=1.0e35):
 
 
 def analyze_quark_star(B, verbose=True):
-    """Analyze quark star with given bag constant B (MeV/fm³)"""
+    """Analyze quark star with given bag constant B (MeV/fm^3)"""
     if verbose:
         print(f"\n{'-'*70}")
-        print(f"ANALYZING QUARK STAR: B = {B} MeV/fm³")
+        print(f"ANALYZING QUARK STAR: B = {B} MeV/fm^3")
         print(f"{'-'*70}")
     
     qs_eos = QuarkStarEOS(backend='analytical', B=B)
@@ -358,7 +358,7 @@ def run_full_analysis(base_dir, mode='neutron', P_transition=1.0e35):
             print(f"{'='*70}")
             
             for B in qs_results:
-                print(f"\n  Testing B = {B} MeV/fm³:")
+                print(f"\n  Testing B = {B} MeV/fm^3:")
                 print(f"  {'-'*66}")
                 gap_result = predict_mass_gap(ns_results[ns_name], qs_results[B], verbose=True)
                 gap_predictions[ns_name][B] = gap_result
@@ -443,7 +443,7 @@ def run_full_analysis(base_dir, mode='neutron', P_transition=1.0e35):
                 gap_max = max(all_gaps[B])
                 spread = gap_max - gap_min
                 
-                print(f"\nB = {B} MeV/fm³:")
+                print(f"\nB = {B} MeV/fm^3:")
                 print(f"  Gap range: {gap_min:.2f} - {gap_max:.2f} Msun")
                 print(f"  Spread: {spread:.2f} Msun")
                 

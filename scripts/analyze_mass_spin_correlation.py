@@ -195,7 +195,7 @@ def main(args):
         print("  Massive pulsars are found ONLY at fast spins.")
         print("  This supports the collapse mechanism:")
         print("  -> Massive pulsars slow down via magnetic dipole radiation")
-        print("  -> When they slow below critical Ω, they collapse to BH")
+        print("  -> When they slow below critical Omega, they collapse to BH")
         print("  -> We don't observe slow, massive pulsars")
     else:
         print("MISS Forbidden zone not clearly evident")
