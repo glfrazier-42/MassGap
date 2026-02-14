@@ -14,8 +14,10 @@ evidence to build a unified case.
   past the neutron degeneracy phase into quark-degenerate matter.
 - They have real internal structure, an equation of state, and finite radius
   inside the event horizon.
-- **M_g != M_i**: gravitational mass differs from inertial mass due to
-  internal pressure contributions. Spin modulates this relationship.
+- **M_g != M_b**: gravitational mass differs from baryonic mass because
+  pressure contributes to gravity (standard GR, embedded in TOV equations).
+  Spin provides centrifugal support that reduces internal pressure, thereby
+  reducing M_g. No claims are made about inertial mass.
 - The "pair-instability mass gap" (50-150 M_sun) does not exist. The
   drop-off at ~50 M_sun reflects the **formation boundary** (maximum mass
   of a newly formed BH), not a gap in the population.
@@ -34,7 +36,7 @@ evidence to build a unified case.
   not directly measured)
 - **q**: mass ratio m2/m1 (m1 >= m2 by convention), ranges 0-1
 - **eta**: symmetric mass ratio, eta = m1*m2/(m1+m2)^2
-- **alpha**: m_g/m_i ratio for enhanced gravity hypothesis
+- **alpha**: [currently unused; reserved for future work]
 
 ## Lines of Evidence
 

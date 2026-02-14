@@ -51,9 +51,6 @@ contributes to gravitational mass (as in GR, where all forms of energy
 gravitate), then spin reduces M_g. This means:
 
 - A rapidly spinning BH has lower M_g than a non-spinning BH with the same M_b
-- The m_g/m_i ratio (alpha) is not universal across BHs -- it depends on spin
-- Different BHs at the same M_g can have different M_b and M_i depending on
-  their spin history
 
 ## GW190521: A Test Case
 
@@ -373,7 +370,9 @@ LIGO masses are inferred from gravitational waveform templates that assume
 standard GR (M_g = M_i). If M_g != M_i, the templates are wrong, and
 extracted masses are biased in ways that are difficult to disentangle. Any
 analysis of LIGO data under this hypothesis must account for this systematic
-bias.
+bias. We have no basis to assert that M_g != M_i, but we are keeping this
+hypothesis in our back pocket, as it would explain the fast orbital
+velocities of (e.g.,) the VPOS objects.
 
 ## GWTC Catalog Analysis
 
