@@ -23,7 +23,8 @@ latex-paper/tables/
 results/
 
 # Data (must be downloaded or generated)
-data/
+data/*
+!data/stellar_collapse_ns_masses.csv
 
 # OS
 .DS_Store

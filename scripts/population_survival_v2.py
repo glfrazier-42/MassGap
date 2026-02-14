@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Population Survival Analysis v2 (no-matplotlib version)
 
@@ -176,8 +175,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.from_csv:
-        data_dir = Path("C:/cygwin64/home/glfra/BlackHoleExplosionMechanism"
-                        "/data/processed")
+        data_dir = Path("data")
         edges, cts, tot, norm = load_from_csv(data_dir)
     else:
         edges, cts, tot, norm = get_hardcoded()

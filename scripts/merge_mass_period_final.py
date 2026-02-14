@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Merge stellar collapse masses with ATNF periods
 
@@ -26,9 +25,9 @@ def main():
     print()
     
     # Load data
-    masses_csv = Path("C:/cygwin64/home/glfra/BlackHoleExplosionMechanism/data/processed/stellar_collapse_ns_masses.csv")
-    periods_csv = Path("C:/cygwin64/home/glfra/BlackHoleExplosionMechanism/data/processed/atnf_pulsar_periods.csv")
-    b_to_j_csv = Path("C:/cygwin64/home/glfra/BlackHoleExplosionMechanism/data/processed/atnf_name_mapping.csv")
+    masses_csv = Path("data/stellar_collapse_ns_masses.csv")
+    periods_csv = Path("data/atnf_pulsar_periods.csv")
+    b_to_j_csv = Path("data/atnf_name_mapping.csv")
     
     masses_df = pd.read_csv(masses_csv)
     periods_df = pd.read_csv(periods_csv)
@@ -39,10 +38,10 @@ def main():
     
     print(f"Stellar collapse masses: {len(masses_df)}")
     print(f"ATNF periods:            {len(periods_df)}")
-    print(f"B→J mappings:            {len(b_to_j_df)}")
+    print(f"B->J mappings:            {len(b_to_j_df)}")
     print()
     
-    # Create B→J lookup
+    # Create B->J lookup
     b_to_j = dict(zip(b_to_j_df['B_name'], b_to_j_df['J_name']))
     
     # Strategy 1: Direct J name match
@@ -56,10 +55,10 @@ def main():
         right_on='PSRJ_norm',
         how='inner'
     )
-    print(f"  ✓ Matched {len(direct_match)} pulsars by J name")
+    print(f"  OK Matched {len(direct_match)} pulsars by J name")
     
     # Strategy 2: B name to J name match
-    print("Strategy 2: B name → J name matching...")
+    print("Strategy 2: B name -> J name matching...")
     
     # Add J name column to masses for B names
     masses_df['J_name_from_B'] = masses_df['name'].map(b_to_j)
@@ -72,7 +71,7 @@ def main():
         right_on='PSRJ_norm',
         how='inner'
     )
-    print(f"  ✓ Matched {len(b_match)} pulsars by B→J mapping")
+    print(f"  OK Matched {len(b_match)} pulsars by B->J mapping")
     
     # Combine matches (avoid duplicates)
     all_matches = pd.concat([direct_match, b_match], ignore_index=True)
@@ -104,7 +103,7 @@ def main():
     print("MATCHED PULSARS:")
     print("=" * 70)
     print()
-    print(f"{'Original Name':<20s} {'PSRJ':<15s} {'Mass(M☉)':<12s} {'Period(ms)':<12s} {'Category':<12s}")
+    print(f"{'Original Name':<20s} {'PSRJ':<15s} {'Mass(M_sun)':<12s} {'Period(ms)':<12s} {'Category':<12s}")
     print("-" * 70)
     
     for _, row in output_df.iterrows():
@@ -125,9 +124,9 @@ def main():
         match = output_df[output_df['PSRJ'].str.contains(km, case=False, na=False)]
         if len(match) > 0:
             row = match.iloc[0]
-            print(f"  ✓ {row['PSRJ']:<15s} M = {row['mass']:.3f} M☉, P = {row['period']*1000:.2f} ms")
+            print(f"  OK {row['PSRJ']:<15s} M = {row['mass']:.3f} M_sun, P = {row['period']*1000:.2f} ms")
         else:
-            print(f"  ✗ {km:<15s} NOT FOUND")
+            print(f"  MISS {km:<15s} NOT FOUND")
     print()
     
     # Statistics
@@ -138,9 +137,9 @@ def main():
     print("STATISTICS:")
     print("=" * 70)
     print(f"Total matched: {len(output_df)}")
-    print(f"Mass range:   {masses.min():.3f} - {masses.max():.3f} M☉")
+    print(f"Mass range:   {masses.min():.3f} - {masses.max():.3f} M_sun")
     print(f"Period range: {periods.min()*1000:.2f} - {periods.max()*1000:.2f} ms")
-    print(f"M > 2.0 M☉:   {sum(masses > 2.0)}")
+    print(f"M > 2.0 M_sun:   {sum(masses > 2.0)}")
     print(f"P < 10 ms:    {sum(periods < 0.01)}")
     print()
     
@@ -152,9 +151,9 @@ def main():
     print()
     
     # Save
-    output_csv = Path("C:/cygwin64/home/glfra/BlackHoleExplosionMechanism/data/processed/pulsar_mass_period_combined.csv")
+    output_csv = Path("data/pulsar_mass_period_combined.csv")
     output_df.to_csv(output_csv, index=False)
-    print(f"✓ Saved to: {output_csv}")
+    print(f"OK Saved to: {output_csv}")
     print()
     
     # Show what we couldn't match
@@ -165,7 +164,7 @@ def main():
     unmatched = masses_df[~masses_df['name'].isin(matched_names)]
     print(f"Could not match {len(unmatched)} pulsars:")
     for _, row in unmatched.head(20).iterrows():
-        print(f"  {row['name']:<30s} M = {row['mass']:.3f} M☉  [{row['category']}]")
+        print(f"  {row['name']:<30s} M = {row['mass']:.3f} M_sun  [{row['category']}]")
     if len(unmatched) > 20:
         print(f"  ... and {len(unmatched) - 20} more")
     print()

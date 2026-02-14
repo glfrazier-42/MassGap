@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Analyze mass-period correlation to test for "forbidden zone"
 
@@ -6,8 +5,10 @@ This tests the hypothesis that massive pulsars can only exist at fast spins,
 creating an asymmetric distribution in M-P space.
 """
 
+import argparse
 import pandas as pd
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 from pathlib import Path
 
@@ -40,9 +41,12 @@ def quadrant_analysis(masses, periods):
         'Q4_low_mass_slow': np.sum(q4),
     }
 
-def main():
+def main(args):
+    if args.no_show:
+        matplotlib.use("Agg")
+
     # Load data
-    data_csv = Path("data/processed/pulsar_mass_period_combined.csv")
+    data_csv = Path("data/pulsar_mass_period_combined.csv")
     df = pd.read_csv(data_csv)
     
     masses = df['mass'].values
@@ -59,7 +63,7 @@ def main():
     quad_stats = quadrant_analysis(masses, periods)
     
     print("QUADRANT ANALYSIS (using medians as boundaries):")
-    print(f"  Mass median:   {quad_stats['mass_median']:.3f} M☉")
+    print(f"  Mass median:   {quad_stats['mass_median']:.3f} M_sun")
     print(f"  Period median: {quad_stats['period_median']:.2f} ms")
     print()
     print("Distribution:")
@@ -95,11 +99,11 @@ def main():
     print(f"  Q3 expected: {expected_per_quadrant:.1f}")
     print(f"  Ratio (obs/exp): {q3_ratio:.2f}")
     if q3_ratio < 0.5:
-        print("  ✓ STRONG DEPLETION - Forbidden zone confirmed!")
+        print("  OK STRONG DEPLETION - Forbidden zone confirmed!")
     elif q3_ratio < 0.75:
         print("  ~ Moderate depletion - Some evidence for forbidden zone")
     else:
-        print("  ✗ No significant depletion")
+        print("  MISS No significant depletion")
     print()
     
     # Create visualization
@@ -112,7 +116,7 @@ def main():
     
     # Add median lines
     ax1.axhline(quad_stats['mass_median'], color='red', linestyle='--', 
-                alpha=0.5, label=f"Median M = {quad_stats['mass_median']:.2f} M☉")
+                alpha=0.5, label=f"Median M = {quad_stats['mass_median']:.2f} M_sun")
     ax1.axvline(quad_stats['period_median'], color='red', linestyle='--', 
                 alpha=0.5, label=f"Median P = {quad_stats['period_median']:.1f} ms")
     
@@ -133,7 +137,7 @@ def main():
                         bbox=dict(boxstyle='round,pad=0.3', facecolor='yellow', alpha=0.5))
     
     ax1.set_xlabel('Period (ms)', fontsize=12)
-    ax1.set_ylabel('Mass (M☉)', fontsize=12)
+    ax1.set_ylabel('Mass (M_sun)', fontsize=12)
     ax1.set_title('Mass vs Period - Testing for Forbidden Zone', fontsize=14, fontweight='bold')
     ax1.legend(fontsize=9)
     ax1.grid(True, alpha=0.3)
@@ -151,7 +155,7 @@ def main():
     ax2.axvline(quad_stats['period_median'], color='red', linestyle='--', alpha=0.5)
     
     ax2.set_xlabel('Period (ms) [log scale]', fontsize=12)
-    ax2.set_ylabel('Mass (M☉)', fontsize=12)
+    ax2.set_ylabel('Mass (M_sun)', fontsize=12)
     ax2.set_title('Mass vs Period (Log Scale)', fontsize=14, fontweight='bold')
     ax2.grid(True, alpha=0.3, which='both')
     
@@ -161,10 +165,10 @@ def main():
     plt.tight_layout()
     
     # Save figure
-    output_fig = Path("C:/cygwin64/home/glfra/BlackHoleExplosionMechanism/figures/mass_period_forbidden_zone.png")
+    output_fig = Path("results/mass_period_forbidden_zone.png")
     output_fig.parent.mkdir(exist_ok=True, parents=True)
     plt.savefig(output_fig, dpi=300, bbox_inches='tight')
-    print(f"✓ Saved figure to: {output_fig}")
+    print(f"OK Saved figure to: {output_fig}")
     print()
     
     # Additional analysis: Slowest pulsar at each mass range
@@ -175,30 +179,35 @@ def main():
         if len(in_bin) > 0:
             slowest = in_bin.loc[in_bin['period'].idxmax()]
             fastest = in_bin.loc[in_bin['period'].idxmin()]
-            print(f"  {m_low:.1f}-{m_high:.1f} M☉: Slowest = {slowest['PSRJ']}, "
-                  f"P = {slowest['period']*1000:.1f} ms, M = {slowest['mass']:.3f} M☉"
+            print(f"  {m_low:.1f}-{m_high:.1f} M_sun: Slowest = {slowest['PSRJ']}, "
+                  f"P = {slowest['period']*1000:.1f} ms, M = {slowest['mass']:.3f} M_sun"
                   f"  Fastest = {fastest['PSRJ']}, "
-                  f"P = {fastest['period']*1000:.1f} ms, M = {fastest['mass']:.3f} M☉")
+                  f"P = {fastest['period']*1000:.1f} ms, M = {fastest['mass']:.3f} M_sun")
         else:
-            print(f"  {m_low:.1f}-{m_high:.1f} M☉: No pulsars")
+            print(f"  {m_low:.1f}-{m_high:.1f} M_sun: No pulsars")
     print()
     
     print("=" * 70)
     print("INTERPRETATION:")
     print("=" * 70)
     if q3_ratio < 0.5:
-        print("✓ Strong evidence for forbidden zone!")
+        print("OK Strong evidence for forbidden zone!")
         print("  Massive pulsars are found ONLY at fast spins.")
         print("  This supports the collapse mechanism:")
-        print("  → Massive pulsars slow down via magnetic dipole radiation")
-        print("  → When they slow below critical Ω, they collapse to BH")
-        print("  → We don't observe slow, massive pulsars")
+        print("  -> Massive pulsars slow down via magnetic dipole radiation")
+        print("  -> When they slow below critical Ω, they collapse to BH")
+        print("  -> We don't observe slow, massive pulsars")
     else:
-        print("✗ Forbidden zone not clearly evident")
+        print("MISS Forbidden zone not clearly evident")
         print("  Distribution appears more symmetric")
         print("  May need larger sample or different boundaries")
     
-    plt.show()
+    if not args.no_show:
+        plt.show()
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--no-show", action="store_true",
+                        help="Skip interactive figure display")
+    args = parser.parse_args()
+    main(args)

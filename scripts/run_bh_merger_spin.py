@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 BH Merger Spin Analysis: Testing the Spin-Collapse Mass Gap Hypothesis.
 

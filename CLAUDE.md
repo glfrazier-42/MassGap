@@ -2,11 +2,13 @@
 
 ## Project Overview
 
-This project develops a paper arguing that the "pair-instability mass gap"
-in black hole masses is not a real gap, and that stellar-mass black holes
-are quark stars — compact objects with real internal structure, not
-singularities. The paper brings together multiple independent lines of
-evidence to build a unified case.
+This project develops a paper arguing that the lower mass gap
+(~2.5-5 M_sun) between neutron stars and black holes is the natural
+signature of baryonic matter undergoing a phase transition from neutron
+degeneracy to quark degeneracy. Black holes are quark stars — compact
+objects with real internal structure, not singularities. The paper
+brings together multiple independent lines of evidence to build a
+unified case.
 
 ## Core Hypothesis
 
@@ -18,11 +20,19 @@ evidence to build a unified case.
   pressure contributes to gravity (standard GR, embedded in TOV equations).
   Spin provides centrifugal support that reduces internal pressure, thereby
   reducing M_g. No claims are made about inertial mass.
-- The "pair-instability mass gap" (50-150 M_sun) does not exist. The
-  drop-off at ~50 M_sun reflects the **formation boundary** (maximum mass
-  of a newly formed BH), not a gap in the population.
-- All BHs above ~50 M_sun are products of prior mergers, growing through
-  hierarchical generations.
+- The **lower mass gap** (~2.5-5 M_sun) is the phase transition
+  signature: matter collapses past neutron degeneracy into quark
+  degeneracy, producing a jump in compactness and gravitational mass.
+- The "pair-instability mass gap" (50-150 M_sun) is not observed as a
+  true gap — the GWTC catalog contains many BHs in this range. The
+  drop-off at ~50 M_sun reflects the **formation boundary** (maximum
+  mass of a newly formed BH). The absence of progenitors above ~137
+  M_sun may partly reflect LIGO's frequency sensitivity (merger
+  frequencies fall below LIGO's band at high masses), but the broader
+  absence of intermediate-mass BHs (~150 - 10^5 M_sun) across all
+  detection methods remains an open question. All BHs above ~50 M_sun
+  are products of prior mergers, growing through hierarchical
+  generations.
 
 ## Key Terminology
 
@@ -75,6 +85,25 @@ evidence to build a unified case.
   Uses GR everywhere observationally validated.
 - **Circularity problem**: All LIGO parameters come from Kerr GR template
   fitting. Using GR-derived parameters to test non-GR hypotheses is circular.
+
+## Workflow
+
+- All work is done on the **dev** branch. Periodically merge dev into
+  master and push master to GitHub.
+- **Never commit other people's work** into the repository. This includes
+  third-party papers, datasets with restrictive licenses, etc. The
+  `references/` folder will eventually need to be cleared of any such
+  files.
+- **Full reproducibility** is the goal. A third party should be able to
+  clone the repository, download data from public sources, re-run the
+  analysis scripts, regenerate all tables and figures, and produce the
+  PDF. To that end:
+  - `latex-paper/figures/` and `latex-paper/tables/` are in `.gitignore`;
+    all tables and figures are built from raw data by scripts.
+  - No quantitative results are hard-coded in `mass_gap.tex`.
+  - The README (or scripts where feasible) will document how to manually
+    download and install data so the paper can be built. Some data sources
+    have anti-robot protections requiring manual download.
 
 ## Commands
 
