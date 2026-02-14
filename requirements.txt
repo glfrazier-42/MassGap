@@ -1,0 +1,7 @@
+cupy
+matplotlib
+numba
+numpy
+pandas
+pypdf
+scipy

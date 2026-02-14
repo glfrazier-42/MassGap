@@ -15,9 +15,14 @@ latex-paper/*.toc
 latex-paper/*.fdb_latexmk
 latex-paper/*.fls
 latex-paper/*.synctex.gz
+latex-paper/figures/
+latex-paper/tables/
 
 # Generated results (regenerate from scripts)
 results/
+
+# Data (must be downloaded or generated)
+data/
 
 # OS
 .DS_Store
