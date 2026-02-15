@@ -27,33 +27,39 @@ class TOVSolverScipy:
         self.last_sol = None
     
     def tov_derivatives(self, r: float, y: np.ndarray) -> np.ndarray:
-        """TOV equations"""
+        """TOV equations.
+
+        EOS returns (rho_total, rho_rest):
+          rho_total = epsilon/c^2  (total energy density in mass units)
+          rho_rest  = baryon rest-mass density
+        """
         if r < 0.1:  # Very close to origin
             return np.array([0.0, 0.0, 0.0])
-        
+
         m, P, m_rest = y
-        
+
         if P <= 0:
             return np.array([0.0, 0.0, 0.0])
-        
-        rho, epsilon = self.eos(P)
-        
-        # dm/dr
-        dmdr = 4.0 * np.pi * r**2 * rho
-        
-        # dP/dr
-        numerator = ((rho + P/self.c.c2) * (m + 4.0*np.pi*r**3 * P/self.c.c2) * self.c.G)
+
+        rho_total, rho_rest = self.eos(P)
+
+        # dm/dr  — gravitational mass uses total energy density
+        dmdr = 4.0 * np.pi * r**2 * rho_total
+
+        # dP/dr  — TOV pressure gradient uses total energy density
+        numerator = ((rho_total + P/self.c.c2) * (m + 4.0*np.pi*r**3 * P/self.c.c2) * self.c.G)
         denominator = r * (r - 2.0*self.c.G*m/self.c.c2)
-        
+
         if denominator <= 0:
             return np.array([0.0, 0.0, 0.0])
-        
+
         dPdr = -numerator / denominator
-        
-        # dm_rest/dr
-        metric_factor = np.sqrt(abs(1.0 - 2.0*self.c.G*m/(r*self.c.c2)))
-        dm_rest_dr = 4.0 * np.pi * r**2 * rho * metric_factor
-        
+
+        # dm_rest/dr  — coordinate rest mass (no metric factor)
+        # M_b = integral of 4 pi r^2 rho_rest dr
+        # M_g - M_b  is then the internal-energy contribution to M_g
+        dm_rest_dr = 4.0 * np.pi * r**2 * rho_rest
+
         return np.array([dmdr, dPdr, dm_rest_dr])
     
     def surface_event(self, r: float, y: np.ndarray) -> float:
@@ -65,15 +71,15 @@ class TOVSolverScipy:
     
     def solve(self, P_central: float, r_max: float = 3e6) -> Optional[TOVResult]:
         """Solve TOV equations"""
-        
-        # Get central density
-        rho_central, _ = self.eos(P_central)
-        
+
+        # Get central densities
+        rho_total_c, rho_rest_c = self.eos(P_central)
+
         # Start at 1 cm (numerically stable, essentially at center)
         r_start = 1.0  # cm
-        m_start = (4.0/3.0) * np.pi * r_start**3 * rho_central
+        m_start = (4.0/3.0) * np.pi * r_start**3 * rho_total_c
         P_start = P_central
-        m_rest_start = m_start
+        m_rest_start = (4.0/3.0) * np.pi * r_start**3 * rho_rest_c
         
         y0 = np.array([m_start, P_start, m_rest_start])
         r_span = (r_start, r_max)
@@ -123,9 +129,10 @@ class TOVSolverScipy:
             m_rest_array = y_grid[2]
             
             rho_array = np.array([self.eos(max(P, 0))[0] for P in P_array])
-            
+
+            # Pressure mass: M_g - M_b (internal energy contribution)
             M_pressure = M - M_rest
-            
+
             return TOVResult(
                 radius=R,
                 mass=M,
@@ -135,7 +142,7 @@ class TOVSolverScipy:
                 pressure_mass=M_pressure,
                 pressure_mass_solar=M_pressure / self.c.M_sun,
                 central_pressure=P_central,
-                central_density=rho_central,
+                central_density=rho_total_c,
                 radius_km=R / self.c.km,
                 r_array=r_array,
                 m_array=m_array,

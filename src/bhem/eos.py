@@ -279,19 +279,28 @@ class NeutronStarEOS:
     
     def eos_function(self):
         """
-        Return EOS as callable function for backward compatibility
-        
+        Return EOS as callable for the TOV solver.
+
         Returns
         -------
         eos : callable
-            Function that takes P and returns (rho, eps)
+            Function  P (dyne/cm^2) -> (rho_total, rho_rest)
+              rho_total : float  — total energy density / c^2  (g/cm^3)
+              rho_rest  : float  — baryon rest-mass density    (g/cm^3)
         """
         def eos(P):
             if P <= 0:
                 return 0.0, 0.0
-            rho = self.density_from_pressure(P)
-            eps = self.energy_density(rho)
-            return rho, eps
+            rho_rest = self.density_from_pressure(P)
+            if self.backend == 'tabulated':
+                # table column 3 is specific internal energy (erg/g),
+                # not volumetric energy density — see extraction script.
+                eps_specific = self.energy_density(rho_rest)   # erg/g
+                rho_total = rho_rest * (1.0 + eps_specific / c2)
+            else:
+                # analytical _energy_density already returns epsilon/c^2
+                rho_total = self.energy_density(rho_rest)      # g/cm^3
+            return rho_total, rho_rest
         return eos
 
 
@@ -409,13 +418,27 @@ class QuarkStarEOS:
             return float(self.interp_rho(P))
     
     def eos_function(self):
-        """Return EOS as callable for backward compatibility"""
+        """
+        Return EOS as callable for the TOV solver.
+
+        Returns
+        -------
+        eos : callable
+            Function  P (dyne/cm^2) -> (rho_total, rho_rest)
+              rho_total : float  — epsilon/c^2, total energy density  (g/cm^3)
+              rho_rest  : float  — (epsilon - P)/c^2, rest-mass part  (g/cm^3)
+
+        For the MIT bag model:
+          rho_total = (3P + 4B) / c^2
+          rho_rest  = (2P + 4B) / c^2
+          difference = P / c^2  (pressure contribution to gravitating mass)
+        """
         def eos(P):
             if P <= 0:
                 return 0.0, 0.0
-            rho = self.density_from_pressure(P)
-            eps = self.energy_density(rho)
-            return rho, eps
+            rho_total = self.density_from_pressure(P)   # (3P + 4B)/c^2
+            rho_rest = rho_total - P / c2               # (2P + 4B)/c^2
+            return rho_total, rho_rest
         return eos
 
 
@@ -567,21 +590,27 @@ class HybridEOS:
     
     def eos_function(self):
         """
-        Return EOS as callable function for backward compatibility with TOV solver
-        
+        Return EOS as callable for the TOV solver.
+
+        Delegates to whichever phase is active at the given pressure.
+
         Returns
         -------
         eos : callable
-            Function that takes P (dyne/cm^2) and returns (rho, eps) in g/cm^3
+            Function  P (dyne/cm^2) -> (rho_total, rho_rest)
         """
+        ns_eos = self.neutron_eos.eos_function()
+        qs_eos = self.quark_eos.eos_function()
+
         def eos(P):
             if P <= 0:
                 return 0.0, 0.0
-            rho = self.density_from_pressure(P)
-            eps = self.energy_density(rho)
-            return rho, eps
+            if P > self.P_transition:
+                return qs_eos(P)
+            else:
+                return ns_eos(P)
         return eos
-    
+
     def get_phase_at_pressure(self, P):
         """
         Diagnostic: determine which phase is active at given pressure
