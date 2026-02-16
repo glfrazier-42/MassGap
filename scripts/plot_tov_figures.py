@@ -30,7 +30,7 @@ NS_EOS_LIST = {
 }
 
 QS_B = [60.0, 100.0, 160.0]  # MeV/fm^3
-QS_COLOR = ['black','black','black']
+QS_COLOR = ['#000000', '#555555', '#999999']  # black, dark gray, gray
 
 M_SUN = 1.989e33  # g
 

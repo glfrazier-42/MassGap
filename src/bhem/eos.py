@@ -426,19 +426,27 @@ class QuarkStarEOS:
         eos : callable
             Function  P (dyne/cm^2) -> (rho_total, rho_rest)
               rho_total : float  — epsilon/c^2, total energy density  (g/cm^3)
-              rho_rest  : float  — (epsilon - P)/c^2, rest-mass part  (g/cm^3)
+              rho_rest  : float  — 4B/c^2, bag vacuum energy density  (g/cm^3)
 
-        For the MIT bag model:
+        For the MIT bag model, epsilon = 3P + 4B:
+          - 4B   = QCD vacuum (bag) energy — structural ground-state mass
+          - 3P   = ultrarelativistic quark kinetic energy — generates pressure
           rho_total = (3P + 4B) / c^2
-          rho_rest  = (2P + 4B) / c^2
-          difference = P / c^2  (pressure contribution to gravitating mass)
+          rho_rest  = 4B / c^2  (bag energy only, no kinetic contribution)
+
+        This parallels the NS convention where rho_rest = baryon rest-mass
+        density (no kinetic/thermal energy).  Both strip the internal energy
+        that generates pressure and keep only the ground-state structural
+        energy.  The difference M_g - M_b then measures pressure's
+        contribution to gravitating mass for both matter types.
         """
+        rho_rest_const = 4.0 * self.B_cgs / c2   # bag energy only
+
         def eos(P):
             if P <= 0:
                 return 0.0, 0.0
             rho_total = self.density_from_pressure(P)   # (3P + 4B)/c^2
-            rho_rest = rho_total - P / c2               # (2P + 4B)/c^2
-            return rho_total, rho_rest
+            return rho_total, rho_rest_const
         return eos
 
 

@@ -65,10 +65,20 @@ compact star---the mass that determines its orbit and gravitational
 field---exceeds its baryonic (rest) mass:
 $M_{g} > M_{b}$.
 We define $M_{g}$ as the total gravitational mass enclosed at the
-stellar surface and $M_{b}$ as the integral of the baryon rest-mass
-density weighted by the metric volume element.  The difference
-$M_{g} - M_{b}$ is the gravitational binding energy contributed by
-pressure, a quantity that grows with compactness.
+stellar surface.  The baryonic mass~$M_{b}$ is defined so as to
+isolate the ground-state structural energy of each matter type,
+excluding the internal kinetic energy that generates pressure.
+For neutron-star matter, $M_{b}$ is the integral of the baryon
+rest-mass density~$\rho_{0}$ over coordinate volume---the mass the
+baryons would have if dispersed to infinity with zero internal energy.
+For quark-star matter, $M_{b}$ is the integral of the bag vacuum
+energy density~$4B/c^{2}$ over coordinate volume---the QCD vacuum cost
+of creating the quark-matter volume, with no quark kinetic
+contribution.  Both definitions strip the internal energy that
+generates pressure and keep only the structural ground state.  The
+difference $M_{g} - M_{b}$ then measures pressure's contribution to
+the gravitating mass for both matter types, and grows with
+compactness.
 
 The relationship between pressure, density, and composition is encoded
 in the equation of state (EOS).  For neutron-star matter, we adopt
@@ -80,49 +90,62 @@ DD2 \citep{TypelRopkeKlaehn2010}, and HShen \citep{Shen1998}.  These
 span the range from soft (LS180, $K = 180$~MeV) to stiff (LS375,
 $K = 375$~MeV) nuclear incompressibilities, producing maximum
 neutron-star masses of roughly $2.0$--$3.0\;M_{\odot}$.  For
-quark-star matter we use the MIT bag model \citep{Chodos1974} with bag
-constant $B = 60\;\text{MeV}/\text{fm}^{3}$, which yields a maximum
-mass of $\approx 2.0\;M_{\odot}$.  While pure quark stars remain
-theoretical, recent Bayesian analyses of neutron-star observations
-find strong evidence for quark-matter cores above
+quark-star matter we use the MIT bag model \citep{Chodos1974} with
+three representative bag constants, $B = 60$, $100$, and
+$160\;\text{MeV}/\text{fm}^{3}$, spanning the range from soft to stiff
+quark matter.  These produce maximum gravitational masses of roughly
+$2.0$, $1.6$, and $1.2\;M_{\odot}$, respectively.  While pure quark
+stars remain theoretical, recent Bayesian analyses of neutron-star
+observations find strong evidence for quark-matter cores above
 $\sim\!2\;M_{\odot}$ \citep{Annala2020}.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\columnwidth]{figures/tov_mass_radius.pdf}
-  \caption{Gravitational mass versus radius for stable TOV
-    configurations.  Solid curves show the six nuclear EOS; the dashed
-    curve shows the MIT bag model quark star.  Filled circles mark the
-    maximum-mass configuration for each EOS.}
+  \includegraphics[width=\columnwidth]{figures/tov_mass_radius.png}
+  \caption{Gravitational Mass vs Radius, Neutron and Quark Stars}
+  \note{Stable configurations. Solid curves are the six nuclear EOS; the
+    dashed curves are MIT bag model quark stars with
+    $B = 60$, $100$, and $160\;\text{MeV}/\text{fm}^{3}$.  Filled
+    circles mark the maximum-mass configuration for each EOS.
+  }
   \label{fig:tov_mr}
 \end{figure}
 
 Figure~\ref{fig:tov_mr} shows the standard mass--radius diagram
 obtained by integrating Eq.~\eqref{eq:tov} across a range of central
 pressures for each EOS.  The neutron-star branches span radii of
-$\sim\!11$--$15$~km, while the quark-star branch is more compact,
-reaching only $\sim\!11$~km at maximum mass.  Both families terminate
-at a maximum gravitational mass beyond which no stable equilibrium
-exists.
+$\sim\!11$--$15$~km, while the quark-star branches are more compact,
+reaching $\sim\!7$--$11$~km at maximum mass depending on~$B$.  Both
+families terminate at a maximum gravitational mass beyond which no
+stable equilibrium exists.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\columnwidth]{figures/tov_mg_vs_mb.pdf}
-  \caption{Gravitational mass versus baryonic mass for the same set of
+  \includegraphics[width=\columnwidth]{figures/tov_mg_vs_mb.png}
+  \caption{Gravitational Mass $M_g$ vs. Baryonic Mass $M_b$}
+  \note{Same set of
     EOS as Fig.~\ref{fig:tov_mr}.  The dotted line is the Newtonian
-    limit $M_{g} = M_{b}$.  Every TOV solution lies above this line:
-    pressure contributes positively to gravitational mass.  Filled
-    circles mark the maximum-mass configuration.}
+    limit $M_{g} = M_{b}$.  Neutron-star curves (solid) lie just above
+    this line, with pressure contributing $\sim\!10$--15\% of~$M_{g}$.
+    Quark-star curves (dashed) show dramatically larger separation;
+    their baryonic mass is defined via the bag vacuum energy~$4B/c^{2}$
+    alone, so that the ultrarelativistic quark kinetic energy
+    (which generates pressure) appears entirely in $M_{g} - M_{b}$.
+    Filled circles mark the maximum-mass configuration.}
   \label{fig:tov_mg_mb}
 \end{figure}
 
 The key result is shown in Figure~\ref{fig:tov_mg_mb}, which plots
 $M_{g}$ against~$M_{b}$.  Every TOV solution sits above the
-$M_{g} = M_{b}$ line; the departure grows with compactness.  At the
-neutron-star maximum, the pressure contribution amounts to
-$\sim\!20$--30\% of the baryonic mass.  The quark-star branch, being
-more compact, shows a comparable or larger fractional departure at
-the same~$M_{b}$.
+$M_{g} = M_{b}$ line; the departure grows with compactness.  The
+neutron-star curves (solid) hug the diagonal, with the pressure
+contribution amounting to $\sim\!10$--15\% of~$M_{g}$ at maximum mass.
+The quark-star curves (dashed) depart dramatically: because the
+baryonic mass counts only the bag vacuum energy ($4B/c^{2}$), the
+entire ultrarelativistic quark kinetic energy ($3P/c^{2}$) appears as
+excess gravitational mass.  At the quark-star maximum,
+$M_{g}/M_{b} \sim 1.5$--2, meaning that pressure-generated energy
+accounts for roughly half the gravitating mass.
 
 The implications for the mass gap are direct.  When a neutron star
 exceeds its TOV limit and collapses, it transitions from
@@ -133,9 +156,21 @@ conserved in the collapse, but the gravitational mass jumps upward.
 The lower mass gap---the observed deficit of compact objects between
 $\sim\!2.5$ and $\sim\!5\;M_{\odot}$
 \citep{ThompsonKochanekAdams2019}---is the signature of this
-transition: it spans the range between the highest neutron-star
-$M_{g}$ and the lowest stable quark-star $M_{g}$ at the same~$M_{b}$;
-the lowest stable quark-star is a black hole.
+transition. It spans the range between the highest neutron-star
+$M_{g}$ and the lowest extant quark-star $M_{g}$,
+and the lowest stable quark-star is a black hole.
+
+The spread of neutron-star EOS and quark-star bag constants in
+Figures~\ref{fig:tov_ns} and~\ref{fig:tov_qs} reflects the current
+quantitative uncertainty in dense-matter physics: we do not yet know
+precisely how these stellar objects behave.  Nonetheless, the curves are
+indicative.  Both families show a steepening relationship between $M_{b}$
+and $M_{g}$ with increasing baryonic mass, and quark stars consistently
+show a far larger pressure contribution to $M_{g}$ than neutron stars at
+comparable $M_{b}$.  However, while the TOV analysis demonstrates that a
+phase transition would produce a mass gap, it does not by itself provide
+evidence that neutron stars are in fact collapsing; that evidence is
+presented in the following section.
 
 %==============================================================================
 \section{Pulsar Population Analysis}\label{s:pulsars}
