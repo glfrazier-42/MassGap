@@ -1,0 +1,137 @@
+"""
+Pulsar Mass-Period Figures for the Mass Gap Paper.
+
+Generates:
+  Figure (pulsar_mass_period.png) -- two-panel:
+    (a) Scatter plot of mass vs period for 37 pulsars, color-coded by category
+    (b) Range chart showing fastest/slowest period per mass bin
+
+Usage:
+    PYTHONPATH=src venv/Scripts/python.exe scripts/plot_pulsar_masses.py
+    PYTHONPATH=src venv/Scripts/python.exe scripts/plot_pulsar_masses.py --no-show
+"""
+
+import argparse
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from pathlib import Path
+
+# ---------- configuration ----------
+
+SCATTER_COLOR = '#1f77b4'
+SCATTER_MARKER = 'o'
+
+ANNOTATE_PULSARS = ['J0740+6620', 'J0348+0432', 'J1614-2230']
+
+MASS_BINS = [
+    (1.0, 1.5),
+    (1.5, 2.0),
+    (2.0, 2.5),
+    (2.5, 5.0),
+]
+
+BIN_LABELS = [
+    r'$1.0$–$1.5$',
+    r'$1.5$–$2.0$',
+    r'$2.0$–$2.5$',
+    r'$2.5{+}$',
+]
+
+# ---------- helpers ----------
+
+def load_data(base_dir):
+    """Load pulsar mass-period data."""
+    path = base_dir / 'data' / 'pulsar_mass_period_combined.csv'
+    df = pd.read_csv(path)
+    df['period_ms'] = df['period'] * 1000.0  # seconds to milliseconds
+    return df
+
+
+def plot_scatter(ax, df):
+    """Panel (a): mass vs period scatter plot."""
+    ax.scatter(df['period_ms'], df['mass'],
+               c=SCATTER_COLOR, marker=SCATTER_MARKER,
+               s=40, zorder=3, edgecolors='k', linewidths=0.4)
+
+    # annotate key pulsars
+    for _, row in df[df['PSRJ'].isin(ANNOTATE_PULSARS)].iterrows():
+        ax.annotate(row['PSRJ'],
+                    xy=(row['period_ms'], row['mass']),
+                    xytext=(8, -2), textcoords='offset points',
+                    fontsize=7, color='0.3')
+
+    ax.set_xlabel('Spin period (ms)')
+    ax.set_ylabel(r'Mass ($M_\odot$)')
+    ax.grid(True, alpha=0.25)
+    ax.set_title('(a)', loc='left', fontsize=10, fontweight='bold')
+
+
+def plot_range_chart(ax, df):
+    """Panel (b): period range per mass bin."""
+    y_positions = np.arange(len(MASS_BINS))
+
+    for i, ((m_lo, m_hi), label) in enumerate(zip(MASS_BINS, BIN_LABELS)):
+        mask = (df['mass'] >= m_lo) & (df['mass'] < m_hi)
+        sub = df[mask]
+        n = len(sub)
+        if n == 0:
+            continue
+        p_min = sub['period_ms'].min()
+        p_max = sub['period_ms'].max()
+
+        ax.plot([p_min, p_max], [i, i], 'o-', color='#1f77b4',
+                lw=2.5, ms=7, solid_capstyle='round', zorder=3)
+        ax.annotate(r'$N=%d$' % n,
+                    xy=(p_max, i), xytext=(8, 0),
+                    textcoords='offset points', fontsize=8,
+                    va='center')
+
+    ax.set_yticks(y_positions)
+    ax.set_yticklabels([lbl + r' $M_\odot$' for lbl in BIN_LABELS])
+    ax.set_xlabel('Spin period (ms)')
+    ax.grid(True, alpha=0.25, axis='x')
+    ax.set_title('(b)', loc='left', fontsize=10, fontweight='bold')
+
+
+# ---------- main ----------
+
+def main(args):
+    base_dir = Path(__file__).resolve().parent.parent
+    fig_dir = base_dir / 'latex-paper' / 'figures'
+    fig_dir.mkdir(parents=True, exist_ok=True)
+
+    df = load_data(base_dir)
+    print("Loaded %d pulsars" % len(df))
+
+    # summary per bin
+    print("\nPeriod ranges per mass bin:")
+    for (m_lo, m_hi), label in zip(MASS_BINS, BIN_LABELS):
+        mask = (df['mass'] >= m_lo) & (df['mass'] < m_hi)
+        sub = df[mask]
+        if len(sub) > 0:
+            print("  %s: N=%d, fastest=%.2f ms, slowest=%.1f ms"
+                  % (label, len(sub), sub['period_ms'].min(),
+                     sub['period_ms'].max()))
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.5))
+
+    plot_scatter(ax1, df)
+    plot_range_chart(ax2, df)
+
+    fig.tight_layout()
+    outpath = fig_dir / 'pulsar_mass_period.png'
+    fig.savefig(str(outpath), dpi=300)
+    print("\nSaved %s" % outpath)
+
+    if not args.no_show:
+        plt.show()
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='Generate pulsar mass-period figures for the mass gap paper')
+    parser.add_argument('--no-show', action='store_true',
+                        help='Skip interactive figure display')
+    args = parser.parse_args()
+    main(args)
