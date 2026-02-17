@@ -1,4 +1,5 @@
 cupy
+h5py
 matplotlib
 numba
 numpy

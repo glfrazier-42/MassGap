@@ -11,6 +11,10 @@
 % Path to BibTeX file:
 \newcommand{\bib}{mass_gap.bib}
 
+% Script-generated macros (re-created each time a plot script runs):
+\input{tables/pulsar_macros}
+\input{tables/population_macros}
+
 \begin{document}
 
 \title{Title To Be Determined}
@@ -99,17 +103,35 @@ stars remain theoretical, recent Bayesian analyses of neutron-star
 observations find strong evidence for quark-matter cores above
 $\sim\!2\;M_{\odot}$ \citep{Annala2020}.
 
+%% \begin{figure}[t]
+%%   \centering
+%%   \includegraphics[width=\columnwidth]{figures/tov_mass_radius.png}
+%%   \caption{Gravitational Mass vs Radius, Neutron and Quark Stars}
+%%   \note{Stable configurations. Solid curves are the six nuclear EOS; the
+%%     dashed curves are MIT bag model quark stars with
+%%     $B = 60$, $100$, and $160\;\text{MeV}/\text{fm}^{3}$.  Filled
+%%     circles mark the maximum-mass configuration for each EOS.
+%%   }
+%%   \label{fig:tov_mr}
+%% \end{figure}
+
 \begin{figure}[t]
-  \centering
-  \includegraphics[width=\columnwidth]{figures/tov_mass_radius.png}
-  \caption{Gravitational Mass vs Radius, Neutron and Quark Stars}
-  \note{Stable configurations. Solid curves are the six nuclear EOS; the
+\subcaptionbox{Gravitational Mass vs. Radius\label{fig:tov_mr}}{
+  \includegraphics[scale=0.4]{figures/tov_mass_radius.png}
+}\hfill
+\subcaptionbox{Gravitational Mass vs. Baryonic Mass\label{fig:tov_mg_mb}}{
+  \includegraphics[scale=0.4]{figures/tov_mg_vs_mb.png}
+}
+\caption{Neutron and Quark Star Stable Configurations}
+\note{Solid curves are the six nuclear EOS; the
     dashed curves are MIT bag model quark stars with
-    $B = 60$, $100$, and $160\;\text{MeV}/\text{fm}^{3}$.  Filled
-    circles mark the maximum-mass configuration for each EOS.
-  }
-  \label{fig:tov_mr}
+    $B = 60$, $100$, and $160\;\text{MeV}/\text{fm}^{3}$. For a given
+    baryonic mass $M_b$, quark stars have greater gravitational mass
+    $M_g$ than do neutron stars.
+}
+\label{fig:tov_figs}
 \end{figure}
+
 
 Figure~\ref{fig:tov_mr} shows the standard mass--radius diagram
 obtained by integrating Eq.~\eqref{eq:tov} across a range of central
@@ -119,21 +141,21 @@ reaching $\sim\!7$--$11$~km at maximum mass depending on~$B$.  Both
 families terminate at a maximum gravitational mass beyond which no
 stable equilibrium exists.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\columnwidth]{figures/tov_mg_vs_mb.png}
-  \caption{Gravitational Mass $M_g$ vs. Baryonic Mass $M_b$}
-  \note{Same set of
-    EOS as Fig.~\ref{fig:tov_mr}.  The dotted line is the Newtonian
-    limit $M_{g} = M_{b}$.  Neutron-star curves (solid) lie just above
-    this line, with pressure contributing $\sim\!10$--15\% of~$M_{g}$.
-    Quark-star curves (dashed) show dramatically larger separation;
-    their baryonic mass is defined via the bag vacuum energy~$4B/c^{2}$
-    alone, so that the ultrarelativistic quark kinetic energy
-    (which generates pressure) appears entirely in $M_{g} - M_{b}$.
-    Filled circles mark the maximum-mass configuration.}
-  \label{fig:tov_mg_mb}
-\end{figure}
+%% \begin{figure}[t]
+%%   \centering
+%%   \includegraphics[width=\columnwidth]{figures/tov_mg_vs_mb.png}
+%%   \caption{Gravitational Mass $M_g$ vs. Baryonic Mass $M_b$}
+%%   \note{Same set of
+%%     EOS as Fig.~\ref{fig:tov_mr}.  The dotted line is the Newtonian
+%%     limit $M_{g} = M_{b}$.  Neutron-star curves (solid) lie just above
+%%     this line, with pressure contributing $\sim\!10$--15\% of~$M_{g}$.
+%%     Quark-star curves (dashed) show dramatically larger separation;
+%%     their baryonic mass is defined via the bag vacuum energy~$4B/c^{2}$
+%%     alone, so that the ultrarelativistic quark kinetic energy
+%%     (which generates pressure) appears entirely in $M_{g} - M_{b}$.
+%%     Filled circles mark the maximum-mass configuration.}
+%%   \label{fig:tov_mg_mb}
+%% \end{figure}
 
 The key result is shown in Figure~\ref{fig:tov_mg_mb}, which plots
 $M_{g}$ against~$M_{b}$.  Every TOV solution sits above the
@@ -148,29 +170,35 @@ $M_{g}/M_{b} \sim 1.5$--2, meaning that pressure-generated energy
 accounts for roughly half the gravitating mass.
 
 The implications for the mass gap are direct.  When a neutron star
-exceeds its TOV limit and collapses, it transitions from
-neutron-degenerate to quark-degenerate matter.  Because quark matter
-is more compressible, the resulting quark star is more compact and its
-pressure contribution to~$M_{g}$ increases.  The baryonic mass is
-conserved in the collapse, but the gravitational mass jumps upward.
-The lower mass gap---the observed deficit of compact objects between
-$\sim\!2.5$ and $\sim\!5\;M_{\odot}$
-\citep{ThompsonKochanekAdams2019}---is the signature of this
-transition. It spans the range between the highest neutron-star
-$M_{g}$ and the lowest extant quark-star $M_{g}$,
-and the lowest stable quark-star is a black hole.
+exceeds its TOV limit, it collapses from neutron-degenerate to
+quark-degenerate matter.  The baryonic mass is conserved, but because
+the resulting quark star is more compact, its pressure contribution
+to~$M_{g}$ is larger: the gravitational mass jumps upward.  The lower
+mass gap---the observed deficit of compact objects between $\sim\!2.5$
+and $\sim\!5\;M_{\odot}$ \citep{ThompsonKochanekAdams2019}---is the
+signature of this transition, spanning from the pre-collapse
+neutron-star~$M_{g}$ to the post-collapse quark-star~$M_{g}$.
+Crucially, the post-collapse gravitational mass exceeds the maximum
+stable quark-star solution: the object is not a quark star but a black
+hole. Yet, the smallest observed black holes are over
+5\;$\text{M}_\odot$, suggesting that black holes have a pressure
+component to their $M_g$, which in turn implies that they are coherent
+stellar objects---they are quark stars.
 
-The spread of neutron-star EOS and quark-star bag constants in
-Figures~\ref{fig:tov_ns} and~\ref{fig:tov_qs} reflects the current
-quantitative uncertainty in dense-matter physics: we do not yet know
-precisely how these stellar objects behave.  Nonetheless, the curves are
-indicative.  Both families show a steepening relationship between $M_{b}$
-and $M_{g}$ with increasing baryonic mass, and quark stars consistently
-show a far larger pressure contribution to $M_{g}$ than neutron stars at
-comparable $M_{b}$.  However, while the TOV analysis demonstrates that a
-phase transition would produce a mass gap, it does not by itself provide
-evidence that neutron stars are in fact collapsing; that evidence is
-presented in the following section.
+The spread of EOS and bag constants in Fig.~\ref{fig:tov_figs}
+reflects current uncertainty in dense-matter physics; the precise
+behavior of matter at these densities is not yet known.
+Nonetheless, the qualitative picture is robust.  Both families show
+a steepening $M_{g}$--$M_{b}$ relationship with increasing baryonic
+mass, and quark stars consistently exhibit a far larger pressure
+contribution to~$M_{g}$ than neutron stars at comparable~$M_{b}$.
+That said, the TOV analysis demonstrates only that a phase
+transition \emph{would} produce a mass gap whose endpoint is a
+black hole; it does not, by itself, show that neutron stars
+\emph{do} collapse.  Indeed, the absence of a stable post-collapse
+solution might be read as evidence against collapse.
+Observational evidence that collapse is occurring is presented in
+the following section.
 
 %==============================================================================
 \section{Observational Evidence for Collapse}\label{s:collapse}
@@ -178,7 +206,7 @@ presented in the following section.
 
 \subsection{Pulsars with Known Mass}\label{ss:pulsar-masses}
 
-We assemble a sample of 37 pulsars with dynamically measured masses
+We assemble a sample of \pulsarCount{} pulsars with dynamically measured masses
 from the \texttt{stellarcollapse.org} compilation
 \citep{OConnorOtt2010}, cross-matched with spin periods from the ATNF
 Pulsar Catalogue \citep{Manchester2005}.  The sample spans
@@ -193,37 +221,117 @@ distribution.
 \begin{figure}[t]
   \centering
   \includegraphics[width=\columnwidth]{figures/pulsar_mass_period.png}
-  \caption{Mass vs.\ spin period for 37 pulsars with dynamical mass
-    measurements.  \textbf{(a)}~Scatter plot color-coded by binary
-    category.  \textbf{(b)}~Period range per mass bin: horizontal
-    segments span from the fastest to the slowest period in each bin,
-    with sample size annotated.  The fastest periods are comparable
-    across all bins ($\sim\!2$--5~ms), but the slowest period drops
-    from $\sim\!2800$~ms to $\sim\!17$~ms as mass increases.}
+  \caption{Mass vs.\ Spin Period, Pulsars with Known Mass}
+  \note{Examined \pulsarCount{} pulsars with dynamical mass
+    measurements.  (a)~Scatter plot of 37 pulsars with known mass. No
+    pulsar above 1.6 $\text{M}_\odot$ has a slower period than
+    80~ns. (b)~Period range per mass-bin: horizontal segments span
+    from the fastest to the slowest period in each bin, with sample
+    size annotated.  The fastest periods are comparable across all
+    bins (\pulsarFastestAll--\pulsarFastestSecond~ms), but the slowest
+    period drops from \pulsarSlowestAll~ms to \pulsarSlowestTop~ms as
+    mass increases. Note also that the number of pulsars in each bin
+    decreases as the masses increase.}
   \label{fig:pulsar_mass_period}
 \end{figure}
 
 Figure~\ref{fig:pulsar_mass_period} reveals the key pattern.  When the
 sample is binned by mass, the fastest spin period in each bin is
-roughly constant at $\sim\!2$--5~ms---millisecond pulsars exist at all
-masses.  But the slowest period shrinks dramatically: from
-$\sim\!2800$~ms in the $1.0$--$1.5\;M_{\odot}$ bin down to
-$\sim\!17$~ms above $2.5\;M_{\odot}$.  Massive pulsars are found
-exclusively at fast spin rates; no slowly rotating high-mass neutron
-star has been observed.
+comparable (\pulsarFastestAll--\pulsarFastestSecond~ms), showing that
+millisecond pulsars exist at all masses.  But the slowest period
+shrinks dramatically: from \pulsarSlowestLow~ms in the
+$1.0$--$1.5\;M_{\odot}$ bin down to \pulsarSlowestTop~ms above
+$2.5\;M_{\odot}$.  Massive pulsars are found exclusively at fast spin
+rates; no slowly rotating high-mass neutron star has been observed.
 
 This pattern is consistent with spin providing centrifugal support
 that delays collapse past the TOV stability limit.  As pulsars spin
-down via magnetic dipole radiation, those with the highest baryonic
+down, those with the highest baryonic
 mass cross the stability boundary first, disappearing from the
 observable population.  Only those massive pulsars that still retain
-fast spin remain visible.  The next subsection examines the broader
-pulsar population to test this interpretation at a statistical level.
+fast spin remain visible.  A Spearman rank correlation confirms the
+trend: $\rho = \pulsarSpearmanRho$ ($p = \pulsarSpearmanP$),
+indicating a statistically significant negative association between
+mass and spin period.
+
+That said, these \pulsarCount{} pulsars are the subset with
+dynamically measured masses---a small, heterogeneous sample.  The
+next subsection uses the full ATNF pulsar catalogue to test this
+interpretation with stronger statistics.
 
 \subsection{Pulsar Population Analysis}\label{ss:pulsar-population}
 
-% TODO: Evidence that the most massive neutron stars have high spin
-% rates, consistent with spin delaying collapse.
+The preceding analysis showed that among pulsars with measured masses,
+the most massive are found exclusively at fast spin rates.  If larger
+pulsars collapse as they spin down, the effect should leave a clear
+imprint on the period distribution of the full pulsar population.
+
+We draw \popTotal{} pulsars from the ATNF Pulsar Catalogue
+\citep{Manchester2005} and restrict the sample to the \popNormal{}
+normal (non-recycled) pulsars with $P \geq 100$~ms.  Under magnetic
+dipole braking ($P\dot{P} \approx \text{const}$), the period
+derivative $\dot{P} \propto 1/P$, so pulsars traverse a given period
+interval more slowly at long periods.  The dwell time in an interval
+$dP$ scales as $P\,dP$, and in a steady-state population with
+constant birth rate the number density per log-decade of period should
+be non-decreasing.
+
+\begin{figure}[t]
+\subcaptionbox{Density per log-decade\label{fig:pop_logbins}}{%
+  \includegraphics[scale=0.4]{figures/pulsar_population_logbins.png}%
+}\hfill
+\subcaptionbox{Fixed-width bins vs.\ model\label{fig:pop_linear}}{%
+  \includegraphics[scale=0.4]{figures/pulsar_population_linear.png}%
+}
+\caption{Period Distribution of Normal Pulsars ($P \geq 100$~ms)}
+\note{(a)~Pulsars per log-decade in four logarithmically spaced bins.
+  Blue bars are consistent with a non-decreasing density; red bars
+  fall below the peak, with Poisson significance annotated.
+  (b)~Observed counts in \popLinearBinWidth{}~ms bins (blue) compared
+  with the steady-state dipole spin-down prediction (count $\propto P$,
+  red step line, normalised at 200--300~ms).  Note the logarithmic
+  vertical axis for (b).}
+\label{fig:pop_figs}
+\end{figure}
+
+Figure~\ref{fig:pop_logbins} tests this prediction.  The density
+rises from \popDensityA{} pulsars per decade in the \popBinRangeA{}
+bin to a peak of \popDensityB{} in the \popBinRangeB{} bin, then
+drops precipitously: \popDensityC{} in the \popBinRangeC{} bin (a
+\popSigmaBC{}$\sigma$ deficit relative to the non-decreasing null)
+and just \popDensityD{} in the \popBinRangeD{} bin
+(\popSigmaCD{}$\sigma$).  Figure~\ref{fig:pop_linear} shows the same
+data in fixed-width bins alongside the steady-state prediction.  The
+observed counts fall exponentially while the model rises linearly; by
+3~s the gap exceeds an order of magnitude.
+
+The conventional explanation for the missing long-period pulsars is
+luminosity death: the cessation of coherent radio emission below a
+critical spin-down power \citep{FaucherGiguereKaspi2006}.  However,
+the death line operates at $P \gtrsim 5$~s for typical magnetic fields
+and so does not account for a population decline that is already
+observable at 0.1~s and is distributed across the entire range of
+pulsar spin periods.  Population synthesis studies have invoked
+magnetic field decay to fill the gap, but the required timescales are
+uncertain and \citet{FaucherGiguereKaspi2006} found no evidence for
+significant field decay over pulsar lifetimes.  Most recently,
+\citet{Sautron2024} showed that a death line is not necessary to
+reproduce the observed $P$--$\dot{P}$ diagram: their simulations with
+and without a death line are statistically indistinguishable once the
+maximum pulsar age is capped at $\sim\!4 \times 10^{7}$~yr.  What is
+required is simply that old pulsars are absent---but the physical
+reason for their absence remains unexplained in that framework.
+
+The collapse hypothesis of \S\ref{ss:pulsar-masses} offers a natural
+explanation for observed population dynamics.  As pulsars spin down,
+those with baryonic masses near the TOV limit lose centrifugal support
+and collapse to quark stars (black holes), physically removing them
+from the observable population.  This predicts a gradual thinning of
+the population that begins well before the nominal death
+line---precisely the pattern seen in Figures~\ref{fig:pop_logbins}
+and~\ref{fig:pop_linear}.  It further predicts that the deficit should
+be strongest among the most massive pulsars, a test that targeted mass
+measurements at long periods could address.
 
 \subsection{The Red Supergiant Problem}\label{ss:rsg}
 

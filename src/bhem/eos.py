@@ -48,7 +48,7 @@ See EOS_TABLE_INSTRUCTIONS.md for detailed download instructions.
 import numpy as np
 from typing import Tuple, Optional, Union
 from pathlib import Path
-from scipy.interpolate import CubicSpline, interp1d
+from scipy.interpolate import CubicSpline, PchipInterpolator, interp1d
 
 
 # Physical constants
@@ -184,16 +184,21 @@ class NeutronStarEOS:
     
     def _setup_interpolators(self):
         """Setup interpolation functions"""
-        # Use cubic spline for smooth interpolation
-        # P(rho), eps(rho)
+        # P(rho), eps(rho) — cubic spline, forward direction
         self.interp_P = CubicSpline(self.table_rho, self.table_P, extrapolate=False)
         self.interp_eps = CubicSpline(self.table_rho, self.table_eps, extrapolate=False)
-        
-        # Inverse: rho(P) - use linear interpolation as P is monotonic
-        self.interp_rho = interp1d(self.table_P, self.table_rho, 
-                                    kind='cubic', 
-                                    bounds_error=False,
-                                    fill_value=(self.table_rho[0], self.table_rho[-1]))
+
+        # Inverse: rho(P) — use PCHIP (monotone-preserving) to avoid
+        # cubic overshoot near phase transitions (e.g. LS180).
+        # Deduplicate pressure values first (phase transitions can
+        # produce near-identical P at adjacent rho grid points).
+        P_inv   = self.table_P
+        rho_inv = self.table_rho
+        unique  = np.concatenate(([True], np.diff(P_inv) > 0))
+        P_inv   = P_inv[unique]
+        rho_inv = rho_inv[unique]
+        self.interp_rho = PchipInterpolator(P_inv, rho_inv,
+                                            extrapolate=False)
     
     def _pressure_analytical(self, rho):
         """Calculate pressure analytically (polytropic)"""

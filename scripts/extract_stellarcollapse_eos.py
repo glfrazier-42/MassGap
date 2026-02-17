@@ -40,141 +40,149 @@ def examine_hdf5_structure(filename):
 def extract_cold_eos(filename, output_file="eos_table.dat"):
     """
     Extract cold (T=0), beta-equilibrium EOS from stellarcollapse HDF5 table.
-    
-    Parameters:
-    -----------
-    filename : str
-        Path to the HDF5 file
-    output_file : str
-        Output filename for the extracted table
+
+    Beta-equilibrium is found by minimizing ``logenergy`` (specific
+    internal energy) over the Ye grid at each density, at the lowest
+    temperature slice.  The stellarcollapse.org ``logenergy`` key stores
+    ``log10(eps_specific + energy_shift)`` in erg/g; the constant shift
+    does not affect which Ye is the minimum.  We subtract the shift to
+    recover clean eps_specific.
+
+    Output columns (CGS):
+        rho          rest-mass density         g/cm^3
+        pressure     total pressure            dyne/cm^2
+        eps_specific specific internal energy   erg/g
+
+    The TOV consumer (NeutronStarEOS.eos_function) reconstructs total
+    energy density as  rho_total = rho * (1 + eps_specific / c^2).
+
+    Parameters
+    ----------
+    filename : str or Path
+        Path to the HDF5 file.
+    output_file : str or Path
+        Output filename for the extracted table.
     """
-    
+
     print(f"\nExtracting EOS from {filename}...")
-    
-    with h5py.File(filename, 'r') as f:
-        # Read the grid dimensions
-        # These tables typically have:
-        # - logrho: log10(density in g/cm³)
-        # - logtemp: log10(temperature in MeV)
-        # - ye: electron fraction
-        
-        logrho = f['logrho'][:]  # log10(rho)
-        logtemp = f['logtemp'][:]  # log10(T)
-        ye = f['ye'][:]  # electron fraction
-        
-        print(f"\nGrid dimensions:")
-        print(f"  Density points: {len(logrho)} (log10(rho) from {logrho[0]:.2f} to {logrho[-1]:.2f})")
-        print(f"  Temperature points: {len(logtemp)} (log10(T/MeV) from {logtemp[0]:.2f} to {logtemp[-1]:.2f})")
-        print(f"  Ye points: {len(ye)} (from {ye[0]:.3f} to {ye[-1]:.3f})")
-        
-        # Read thermodynamic quantities
-        # These are typically 3D arrays: [nrho, ntemp, nye]
-        # We need to find the right keys - let's check what's available
-        
-        print(f"\nAvailable thermodynamic quantities:")
-        thermo_keys = [k for k in f.keys() if k not in ['logrho', 'logtemp', 'ye']]
-        for key in thermo_keys[:10]:  # Show first 10
-            print(f"  {key}: shape {f[key].shape}")
-        
-        # Typically: 'logpress', 'logenergy', or 'press', 'energy'
-        # Let's try to find them
-        
-        if 'logpress' in f:
-            logpress = f['logpress'][:]  # log10(pressure in dyne/cm²)
-        elif 'press' in f:
-            press_raw = f['press'][:]
-            logpress = np.log10(press_raw)
-        else:
-            raise KeyError("Could not find pressure data (logpress or press)")
-            
-        if 'logenergy' in f:
-            logenergy = f['logenergy'][:]  # log10(energy density in erg/cm³)
-        elif 'energy' in f:
-            energy_raw = f['energy'][:]
-            logenergy = np.log10(energy_raw)
-        else:
-            raise KeyError("Could not find energy density data (logenergy or energy)")
-        
-        # For cold beta-equilibrium:
-        # - Take coldest temperature (index 0, usually T ~ 0.01 MeV)
-        # - Find Ye corresponding to beta-equilibrium (need to check if provided)
-        
-        itemp = 0  # Coldest temperature
-        
-        print(f"\nExtracting data at T = {10**logtemp[itemp]:.4f} MeV")
-        print(f"Array shapes: logpress={logpress.shape}, logenergy={logenergy.shape}")
-        
-        # Figure out the actual array structure
-        # Could be [nrho, ntemp, nye] or [ntemp, nrho, nye] or other
-        rho = 10**logrho  # Convert to linear g/cm³
-        
-        # Try to determine dimension order by checking shapes
+
+    with h5py.File(str(filename), 'r') as f:
+        # ---- grid axes ----
+        logrho  = f['logrho'][:]    # log10(rho / [g/cm^3])
+        logtemp = f['logtemp'][:]   # log10(T   / [MeV])
+        ye      = f['ye'][:]        # electron fraction
+
         nrho, ntemp, nye = len(logrho), len(logtemp), len(ye)
-        
-        if logpress.shape == (nrho, ntemp, nye):
-            # [nrho, ntemp, nye]
-            press_2d = 10**logpress[:, itemp, :]  # [nrho, nye]
-            energy_2d = 10**logenergy[:, itemp, :]  # [nrho, nye]
+
+        print(f"\nGrid dimensions:")
+        print(f"  Density points: {nrho} (log10 rho from {logrho[0]:.2f} to {logrho[-1]:.2f})")
+        print(f"  Temperature points: {ntemp} (log10 T/MeV from {logtemp[0]:.2f} to {logtemp[-1]:.2f})")
+        print(f"  Ye points: {nye} (from {ye[0]:.3f} to {ye[-1]:.3f})")
+
+        # ---- thermodynamic arrays ----
+        logpress_3d  = f['logpress'][:]       # log10(P / [dyne/cm^2])
+        logenergy_3d = f['logenergy'][:]      # log10((eps_specific + shift) / [erg/g])
+        energy_shift = float(f['energy_shift'][()])  # erg/g
+
+        print(f"  energy_shift = {energy_shift:.6e} erg/g")
+
+        # ---- detect dimension ordering ----
+        # All stellarcollapse.org files use [nye, ntemp, nrho]
+        itemp = 0  # coldest temperature slice
+
+        if logpress_3d.shape == (nrho, ntemp, nye):
             dim_order = "[nrho, ntemp, nye]"
-        elif logpress.shape == (ntemp, nrho, nye):
-            # [ntemp, nrho, nye]
-            press_2d = 10**logpress[itemp, :, :]  # [nrho, nye]
-            energy_2d = 10**logenergy[itemp, :, :]  # [nrho, nye]
+            logpress_2d  = logpress_3d[:, itemp, :]    # [nrho, nye]
+            logenergy_2d = logenergy_3d[:, itemp, :]
+        elif logpress_3d.shape == (ntemp, nrho, nye):
             dim_order = "[ntemp, nrho, nye]"
-        elif logpress.shape == (nye, ntemp, nrho):
-            # [nye, ntemp, nrho]
-            press_2d = 10**logpress[:, itemp, :].T  # [nrho, nye]
-            energy_2d = 10**logenergy[:, itemp, :].T  # [nrho, nye]
+            logpress_2d  = logpress_3d[itemp, :, :]
+            logenergy_2d = logenergy_3d[itemp, :, :]
+        elif logpress_3d.shape == (nye, ntemp, nrho):
             dim_order = "[nye, ntemp, nrho]"
+            logpress_2d  = logpress_3d[:, itemp, :].T  # [nrho, nye]
+            logenergy_2d = logenergy_3d[:, itemp, :].T
         else:
-            raise ValueError(f"Unexpected array shape: {logpress.shape} vs expected ({nrho}, {ntemp}, {nye})")
-        
+            raise ValueError(
+                f"Unexpected array shape: {logpress_3d.shape} "
+                f"vs expected ({nrho}, {ntemp}, {nye})")
+
+        print(f"\nExtracting at T = {10**logtemp[itemp]:.4f} MeV")
         print(f"Detected dimension order: {dim_order}")
-        print(f"2D slice shape: {press_2d.shape}")
-        
-        # Find Ye closest to 0.1 (typical for cold beta-equilibrium neutron star matter)
-        target_ye = 0.1
-        iye = np.argmin(np.abs(ye - target_ye))
-        actual_ye = ye[iye]
-        
-        print(f"Using Ye = {actual_ye:.4f} (closest to {target_ye})")
-        
-        # Extract 1D arrays at this Ye
-        press_1d = press_2d[:, iye]
-        energy_1d = energy_2d[:, iye]
-        
-        print(f"1D arrays shape: rho={rho.shape}, press={press_1d.shape}, energy={energy_1d.shape}")
-        
-        # Filter out any bad values (NaN, inf, or negative)
-        valid = np.isfinite(rho) & np.isfinite(press_1d) & np.isfinite(energy_1d)
-        valid &= (press_1d > 0) & (energy_1d > 0)
-        
-        rho_clean = rho[valid]
-        press_clean = press_1d[valid]
-        energy_clean = energy_1d[valid]
-        
-        print(f"\nExtracted {len(rho_clean)} valid data points")
-        print(f"  Density range: {rho_clean[0]:.3e} to {rho_clean[-1]:.3e} g/cm^3")
-        print(f"  Pressure range: {press_clean[0]:.3e} to {press_clean[-1]:.3e} dyne/cm^2")
-        print(f"  Energy density range: {energy_clean[0]:.3e} to {energy_clean[-1]:.3e} erg/cm^3")
-        
-        # Save to file
-        header = f"""# EOS Table extracted from {os.path.basename(filename)}
-# Source: stellarcollapse.org
-# Temperature: T = {10**logtemp[itemp]:.4f} MeV (cold)
-# Electron fraction: Ye = {actual_ye:.4f}
-# Units: CGS (g/cm³, dyne/cm², erg/cm³)
-# Columns: rho (g/cm³), pressure (dyne/cm²), energy_density (erg/cm³)
-"""
-        
-        with open(output_file, 'w') as out:
+
+        # ---- find beta-equilibrium Ye at each density ----
+        # Minimise logenergy over Ye.  Since log10 is monotonic and
+        # energy_shift is a constant, argmin is identical to minimising
+        # the unshifted specific energy.
+        rho = 10**logrho                      # g/cm^3
+
+        rho_out  = np.empty(nrho)
+        P_out    = np.empty(nrho)
+        eps_out  = np.empty(nrho)
+        ye_out   = np.empty(nrho)
+
+        for irho in range(nrho):
+            e_slice = logenergy_2d[irho, :]    # log10(eps+shift)(Ye)
+            iye_min = np.argmin(e_slice)        # beta-equilibrium Ye
+
+            rho_out[irho] = rho[irho]
+            P_out[irho]   = 10**logpress_2d[irho, iye_min]   # dyne/cm^2
+            ye_out[irho]  = ye[iye_min]
+
+            # Recover specific internal energy (erg/g), removing the shift
+            eps_out[irho] = 10**e_slice[iye_min] - energy_shift
+
+        # ---- filter bad values ----
+        # eps_specific can be negative (bound matter), so only require
+        # finite values and positive pressure.
+        valid = np.isfinite(P_out) & np.isfinite(eps_out) & (P_out > 0)
+        rho_out  = rho_out[valid]
+        P_out    = P_out[valid]
+        eps_out  = eps_out[valid]
+        ye_out   = ye_out[valid]
+
+        # Enforce strict pressure monotonicity (required by the TOV
+        # interpolator).  Some EOS tables (e.g. LS180) have wiggles
+        # near the nuclear saturation transition; keep only the
+        # running-maximum envelope.
+        mono = np.ones(len(P_out), dtype=bool)
+        P_max_so_far = P_out[0]
+        for i in range(1, len(P_out)):
+            if P_out[i] <= P_max_so_far:
+                mono[i] = False
+            else:
+                P_max_so_far = P_out[i]
+        if not mono.all():
+            n_drop = (~mono).sum()
+            print(f"  Dropped {n_drop} non-monotonic pressure points")
+            rho_out = rho_out[mono]
+            P_out   = P_out[mono]
+            eps_out = eps_out[mono]
+            ye_out  = ye_out[mono]
+
+        print(f"\nExtracted {len(rho_out)} valid data points")
+        print(f"  Density range: {rho_out[0]:.3e} to {rho_out[-1]:.3e} g/cm^3")
+        print(f"  Pressure range: {P_out[0]:.3e} to {P_out[-1]:.3e} dyne/cm^2")
+        print(f"  Ye range (beta-eq): {ye_out.min():.4f} to {ye_out.max():.4f}")
+
+        # ---- write output ----
+        header = (
+            f"# EOS Table extracted from {os.path.basename(str(filename))}\n"
+            f"# Source: stellarcollapse.org\n"
+            f"# Temperature: T = {10**logtemp[itemp]:.4f} MeV (cold)\n"
+            f"# Electron fraction: Ye = beta-equilibrium (minimised energy per baryon)\n"
+            f"# Units: CGS\n"
+            f"# Columns: rho (g/cm^3), pressure (dyne/cm^2), eps_specific (erg/g)\n"
+        )
+
+        with open(str(output_file), 'w') as out:
             out.write(header)
-            for r, p, e in zip(rho_clean, press_clean, energy_clean):
+            for r, p, e in zip(rho_out, P_out, eps_out):
                 out.write(f"{r:.6e}  {p:.6e}  {e:.6e}\n")
-        
+
         print(f"\nOK Saved to: {output_file}")
-        
-        return rho_clean, press_clean, energy_clean
+
+        return rho_out, P_out, eps_out
 
 
 def main():

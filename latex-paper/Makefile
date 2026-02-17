@@ -11,8 +11,11 @@ BIBTEX = bibtex
 # Default target
 all: $(PAPER).pdf
 
+TABLE_DEPS = $(wildcard tables/*.tex)
+FIGURE_DEPS = $(wildcard figures/*.png figures/*.pdf)
+
 # Build PDF (run twice for references, with bibtex in between)
-$(PAPER).pdf: $(PAPER).tex $(PAPER).bib paper.sty $(PAPER).bst
+$(PAPER).pdf: $(PAPER).tex $(PAPER).bib paper.sty $(PAPER).bst $(TABLE_DEPS) $(FIGURE_DEPS)
 	$(LATEX) $(PAPER)
 	$(BIBTEX) $(PAPER)
 	$(LATEX) $(PAPER)
