@@ -95,12 +95,33 @@ unified case.
     download and install data so the paper can be built. Some data sources
     have anti-robot protections requiring manual download.
 
+## Working Directory and Paths
+
+The project root is always the current working directory. Use relative
+paths everywhere — in all file tool calls (Read, Write, Edit, Glob).
+Never construct or use absolute paths.
+
+## Shell Access
+
+Claude runs without access to a Cygwin shell (no mintty). The Bash tool
+is unreliable in this environment. Do not attempt to run commands via the
+Bash tool. Instead:
+- Use Read, Write, Edit, Glob for all file operations.
+- When a command must be run (tests, build, scripts), output it as a
+  instruction for the user to execute in their terminal.
+- For directory creation, write a file into the target directory; the
+  Write tool creates parent directories automatically.
+
 ## Commands
+
+- Do not execute 'cd <dir>' before invoking python. Claude will always be
+  launched in the MassGap directory.
+- Python should always be invoked "PYTHONPATH=src venv/Scripts/python ..."
 
 ```bash
 # Activate virtual environment (create first if needed)
 python -m venv venv
-source venv/bin/activate  # or: venv/Scripts/activate on Windows
+source venv/Scripts/activate  # or: venv/Scripts/activate on Windows
 
 # Run scripts
 PYTHONPATH=src python scripts/<script_name>.py
