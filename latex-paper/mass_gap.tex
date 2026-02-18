@@ -14,6 +14,7 @@
 % Script-generated macros (re-created each time a plot script runs):
 \input{tables/pulsar_macros}
 \input{tables/population_macros}
+\input{tables/merger_macros}
 
 \begin{document}
 
@@ -413,9 +414,179 @@ the TOV analysis of \S\ref{s:tov}.
 \section{BH Merger Spin Analysis}\label{s:gwtc}
 %==============================================================================
 
-% TODO: Analysis of the GWTC catalog -- Gaussian remnant spin
-% distribution, spin efficiency, excess deficit, iso-m2 tracks,
-% 50 M_sun formation boundary.
+The preceding sections established that compact objects with baryonic
+mass well below $5\;M_{\odot}$ collapse to form black holes, and that
+the TOV equations predict a mass gap at the neutron--quark transition.
+But those arguments do not, by themselves, demonstrate that black holes
+contain structured matter.  If black holes are quark stars---compact
+objects with a real equation of state, finite radius, and internal
+pressure---then their mergers should leave observable signatures in the
+gravitational-wave record that differ from the predictions of the
+point-singularity model.  The GWTC catalog \citep{GWTC3,GWOSC2023}
+provides exactly the data needed to test this.
+
+Consider two models of what happens when two black holes merge.  In the
+singularity model, each black hole is a point mass enclosed by an event
+horizon; the mass deficit $m_1 + m_2 - m_{\rm final}$ is energy
+radiated as gravitational waves.  The ``spin'' of a Kerr black hole is
+a property of the spacetime geometry: angular momentum is defined as a
+conserved charge at spatial infinity, and the singularity itself has no
+moment of inertia and no internal structure for centrifugal force to act
+upon.  In the quark star model, two physical objects collide and merge.
+The remnant is a spinning body with a moment of inertia, and its spin
+provides centrifugal support that reduces the internal pressure and
+therefore reduces the gravitational mass~$M_g$ relative to the conserved
+baryonic mass~$M_b$.  No baryonic mass is converted to energy---the
+gravitational-wave energy comes from the rotational kinetic energy of
+the inspiral---and the apparent mass deficit includes a spin-induced
+reduction in~$M_g$.
+
+The two models also differ in how they account for the gravitational
+waves observed after the merger (the ``ringdown'').  In the singularity
+model, the inspiral GWs are driven radiation, sourced by the
+stress-energy of orbiting masses; but the post-merger GWs are
+quasi-normal modes---source-free oscillations of the Kerr geometry
+ringing down to equilibrium.  The radiation mechanism changes at
+merger from matter-sourced to geometry-sourced.  In the quark star
+model, a single mechanism operates throughout: the time-varying
+quadrupole moment of a physical mass distribution, first from two
+bodies in mutual orbit, then from a distorted remnant settling into
+axial symmetry.  Both models predict post-merger gravitational
+waves---quasi-normal modes have been a prediction of the Kerr model
+since the 1970s---but they disagree on what is radiating.
+
+Both models predict that the mass deficit depends on the symmetric mass
+ratio $\eta = m_1 m_2 / (m_1 + m_2)^{2}$, because the orbital dynamics
+that govern both GW radiation and angular momentum transfer are
+controlled by~$\eta$.  We use the non-spinning GR prediction of
+\citet{BuonannoKidderLehner2008} as a baseline:
+%
+\begin{equation}\label{eq:frac_gr}
+  f_{\rm GR} = 0.0572\,\eta + 0.498\,\eta^{2}\,.
+\end{equation}
+%
+This represents the minimum deficit predicted by the singularity model
+(non-spinning progenitors).  The quark star model predicts additional
+deficit from spin-induced $M_g$ reduction, proportional to the remnant
+spin generated.
+
+We test this using \gwNbbh{} confident binary black hole events
+($m_1 > 3\;M_{\odot}$, $m_2 > 3\;M_{\odot}$,
+$p_{\rm astro} > 0.5$) from the GWTC catalog, of which \gwNdeficit{}
+have both a measured final mass and effective spin $\chi_{\rm eff}$.
+For each event we compute the remnant spin~$\chi_f$ from the
+numerical-relativity fitting formula
+%
+\begin{equation}\label{eq:chi_f}
+  \chi_f = L_{\rm orb}(\eta) + \frac{\chi_{\rm eff}\,(1+q^{2})}{(1+q)^{2}}\,,
+\end{equation}
+%
+where $L_{\rm orb}(\eta) = 2\sqrt{3}\,\eta - 3.52\,\eta^{2}
++ 2.58\,\eta^{3}$ is the orbital angular momentum contribution
+and the second term is the spin angular momentum contribution
+(assuming equal component spins $a_1 = a_2 = \chi_{\rm eff}$).
+The excess fractional deficit is then
+$\Delta f = f_{\rm obs} - f_{\rm GR}$, where
+$f_{\rm obs} = (m_1 + m_2 - m_{\rm final}) / (m_1 + m_2)$.
+
+\paragraph{Test 1: excess deficit vs.\ remnant spin}
+
+Figure~\ref{fig:excess_vs_chif} plots the excess fractional deficit
+$\Delta f$ against the computed remnant spin~$\chi_f$ for all
+\gwNdeficit{} events.  A Spearman rank correlation gives
+$\rho = \gwRhoExcessChif$ ($p = \gwPExcessChif$), a highly significant
+positive association.  The median excess is $\gwMedianExcess$, and
+\gwFracPositive{} of events exceed the non-spinning GR prediction.
+The binned medians trace a clear rising curve from near zero at
+$\chi_f \approx 0.55$ to ${\sim}0.012$ at $\chi_f \approx 0.85$.
+
+The quark star model offers a direct physical mechanism for this
+correlation: a spinning body with internal structure experiences
+centrifugal support that reduces its central pressure and therefore
+its gravitational mass.  More remnant spin means more centrifugal
+support and a larger apparent mass deficit.  In the singularity model,
+the remnant's ``spin'' is a geometric property of the Kerr metric, with
+no internal structure for centrifugal force to act upon; the connection
+between spin and mass deficit is less direct.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/bh_merger_excess_vs_chif.png}
+  \caption{Excess Fractional Mass Deficit vs.\ Remnant Spin}
+  \note{Each point is a GWTC binary black hole merger.  The excess
+    is computed relative to the non-spinning GR prediction
+    (Eq.~\ref{eq:frac_gr}).  Points are coloured by primary mass
+    $m_1$.  Remnant spin $\chi_f$ is computed from
+    Eq.~\eqref{eq:chi_f}.  Red squares show binned medians.
+    The Spearman correlation ($\rho = \gwRhoExcessChif$,
+    $p = \gwPExcessChif$) confirms that higher remnant spin is
+    associated with larger excess deficit.}
+  \label{fig:excess_vs_chif}
+\end{figure}
+
+\paragraph{Test 2: deficit per unit $m_2$ vs.\ mass ratio}
+
+Figure~\ref{fig:deficit_per_m2} plots the total mass deficit per unit
+$m_2$ against the mass ratio~$q$.  Two prediction curves are shown.
+The singularity model curve (red, dashed) uses the non-spinning GR
+formula (Eq.~\ref{eq:frac_gr}).  The quark star model curve (purple,
+solid) adds a spin-induced $M_g$ reduction proportional to the square
+of the orbital angular momentum deposited:
+$f_{\rm QS} = f_{\rm GR} + \alpha\,L_{\rm orb}(\eta)^{2}$,
+where $\alpha = \gwAlphaQS$ is fit from the excess-vs-$\chi_f$ data
+of Test~1.  Both curves are normalized by~$m_2$ to measure the deficit
+generated per solar mass of secondary, allowing comparison across
+mergers of different mass scales.
+
+The two curves have the same shape because both effects---GW radiation
+and spin deposition---are governed by the same orbital dynamics through
+$\eta$.  Equal-mass mergers maximize both GW emission and angular
+momentum transfer; lopsided mergers reduce both.  The quark star model
+shifts the curve upward by the spin-induced contribution, which is
+nearly constant in deficit/$m_2$ across all mass ratios because the
+decreasing $L_{\rm orb}^{2}$ at low~$q$ is offset by the increasing
+$1/m_2$ amplification.
+
+The binned medians (green squares) track the quark star model curve
+across the full range of mass ratios, sitting consistently above the
+singularity model prediction.  A Spearman correlation of the raw
+deficit/$m_2$ against $q$ gives $\rho = \gwRhoDeficitQ$
+($p = \gwPDeficitQ$).
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/bh_merger_deficit_per_m2.png}
+  \caption{Mass Deficit per Unit $m_2$ vs.\ Mass Ratio}
+  \note{Blue points: observed deficit divided by $m_2$ for each GWTC
+    event.  Red dashed curve: singularity model (non-spinning GR,
+    Eq.~\ref{eq:frac_gr}).  Purple solid curve: quark star model,
+    adding spin-induced $M_g$ reduction with $\alpha = \gwAlphaQS$
+    fit from Test~1.  Green squares: binned medians.  The data
+    follow the quark star prediction, not the singularity prediction
+    ($\rho = \gwRhoDeficitQ$, $p = \gwPDeficitQ$).}
+  \label{fig:deficit_per_m2}
+\end{figure}
+
+Both tests point in the same direction.  The mass deficit in binary
+black hole mergers correlates strongly with the remnant spin
+(Test~1), and the observed deficit level matches the quark star
+prediction across all mass ratios while consistently exceeding the
+singularity prediction (Test~2).  The quark star model explains both
+results with a single physical mechanism---centrifugal support reducing
+$M_g$---using one free parameter ($\alpha$) fit from Test~1 and
+validated against Test~2.
+
+A caveat is in order.  The non-spinning GR formula
+(Eq.~\ref{eq:frac_gr}) is a conservative baseline: the singularity
+model with spinning progenitors also predicts more deficit than the
+non-spinning case, because spin-orbit coupling enhances GW emission.
+Quantifying the spinning-GR prediction requires full numerical
+relativity fitting formulas that include component spins, which is
+beyond the scope of this analysis.  The present comparison establishes
+that the data depart from the non-spinning baseline in the direction
+and by the amount that the quark star model predicts; whether the
+spinning singularity model can account for the same departure is a
+question for future work.
 
 %==============================================================================
 \section{Discussion}\label{s:discussion}
