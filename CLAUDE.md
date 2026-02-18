@@ -23,16 +23,6 @@ unified case.
 - The **lower mass gap** (~2.5-5 M_sun) is the phase transition
   signature: matter collapses past neutron degeneracy into quark
   degeneracy, producing a jump in compactness and gravitational mass.
-- The "pair-instability mass gap" (50-150 M_sun) is not observed as a
-  true gap — the GWTC catalog contains many BHs in this range. The
-  drop-off at ~50 M_sun reflects the **formation boundary** (maximum
-  mass of a newly formed BH). The absence of progenitors above ~137
-  M_sun may partly reflect LIGO's frequency sensitivity (merger
-  frequencies fall below LIGO's band at high masses), but the broader
-  absence of intermediate-mass BHs (~150 - 10^5 M_sun) across all
-  detection methods remains an open question. All BHs above ~50 M_sun
-  are products of prior mergers, growing through hierarchical
-  generations.
 
 ## Key Terminology
 

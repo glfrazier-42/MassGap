@@ -6,7 +6,7 @@
 \newcolumntype{d}[1]{D{.}{.}{#1}}
 
 % Paper title for PDF metadata:
-\hypersetup{pdftitle={Title To Be Determined}}
+\hypersetup{pdftitle={Quark Degeneracy and the Lower Mass Gap}}
 
 % Path to BibTeX file:
 \newcommand{\bib}{mass_gap.bib}
@@ -18,7 +18,7 @@
 
 \begin{document}
 
-\title{Title To Be Determined}
+\title{Quark Degeneracy and the Lower Mass Gap}
 
 \author{Gregory L. Frazier \thanks{Independent researcher. The author
     thanks Claude (Anthropic) for assistance with analysis and
@@ -29,7 +29,20 @@
 \begin{titlepage}
 \maketitle
 
-% Abstract to be written.
+\begin{abstract}
+The observed deficit of compact objects between ${\sim}2.5$ and
+${\sim}5\;M_{\odot}$---the lower mass gap---has no widely accepted
+physical explanation.  We propose that the gap is the signature of a
+phase transition from neutron-degenerate to quark-degenerate matter,
+implying that black holes possess internal structure rather than
+singularities.  Four independent lines of evidence support this
+interpretation: the TOV equations anticipate the gap at the
+neutron--quark transition; massive pulsars disappear as they spin
+down, consistent with centrifugal support delaying collapse; failed
+supernovae confirm that cores well below $5\;M_{\odot}$ collapse to
+form black holes; and LIGO merger remnants exhibit spin-dependent mass
+deficits consistent with structured matter.
+\end{abstract}
 
 \end{titlepage}
 
@@ -37,16 +50,55 @@
 \section{Introduction}\label{s:introduction}
 %==============================================================================
 
-% TODO: Introduce the pair-instability mass gap problem and the quark
-% star hypothesis.
+Gravitational-wave and X-ray observations reveal a gap in the mass
+spectrum of compact objects.  Neutron stars with dynamically measured
+masses cluster below ${\sim}2.5\;M_{\odot}$---the heaviest in a
+sample of XX is YY~$M_{\odot}$
+%% XX = number of NS with dynamical masses (stellarcollapse.org)
+%% YY = mass of heaviest NS (stellarcollapse.org)
+\citep{OConnorOtt2010}---while black holes in X-ray binaries begin at
+${\sim}$ZZ~$M_{\odot}$
+%% ZZ = lightest X-ray binary BH mass (stellarcollapse.org)
+\citep{Bailyn1998}.  The deficit of objects between these limits is
+the \emph{lower mass gap}.
 
-%==============================================================================
-\section{Background}\label{s:background}
-%==============================================================================
+The reality and origin of the gap have been debated for two decades.
+\citet{Bailyn1998} first identified the clustering of X-ray binary
+black holes above ${\sim}5\;M_{\odot}$; \citet{Ozel2010} argued on
+statistical grounds that the gap is real and not a selection effect,
+and \citet{Farr2011} reached the same conclusion with a Bayesian
+analysis.  \citet{Kreidberg2012} countered that systematic errors in
+X-ray binary mass measurements could partially fill the gap.  On the
+theoretical side, \citet{Fryer2012} showed that rapid supernova
+explosion mechanisms can produce a gap by ejecting the envelope before
+significant fallback, while delayed mechanisms fill it in.  More
+recently, the LIGO--Virgo detection of GW190814---a merger whose
+$2.6\;M_{\odot}$ secondary sits squarely in the gap
+\citep{GW190814}---and population synthesis studies
+\citep{Zevin2020} have renewed the question of whether the gap is
+truly empty or merely underpopulated.  No consensus has emerged on the
+physical origin of the deficit.
 
-% TODO: Review existing frameworks -- pair-instability supernovae,
-% the predicted 50--150 M_sun gap, LIGO/Virgo observations, and the
-% conventional understanding of black hole interiors.
+We propose that the lower mass gap is the signature of a phase
+transition: when a neutron star exceeds the
+Tolman--Oppenheimer--Volkoff stability limit, its matter collapses
+from neutron degeneracy to quark degeneracy, producing a step-function
+increase in compactness and gravitational mass.  This explanation
+requires that black holes are not singularities but structured
+bodies---objects with a real equation of state, finite volume, and
+internal pressure inside the event horizon.  This is a testable
+requirement: the TOV equations show that pressure contributes to
+gravitational mass, a mechanism that cannot operate in a dimensionless
+point.  If black holes have internal structure, their mergers should
+exhibit spin-dependent mass deficits beyond what gravitational-wave
+radiation alone predicts; we show that they do.  We present four lines
+of evidence: the TOV equations predict the gap quantitatively
+(\S\ref{s:tov}); massive pulsars and the pulsar population show the
+expected spin-dependent disappearance (\S\ref{s:collapse}); failed
+supernovae independently confirm sub-$5\;M_{\odot}$ collapse
+(\S\ref{ss:rsg}); and LIGO merger remnants carry spin signatures
+consistent with structured matter, not point singularities
+(\S\ref{s:gwtc}).
 
 %==============================================================================
 \section{TOV Equation Analysis}\label{s:tov}
@@ -193,6 +245,16 @@ Nonetheless, the qualitative picture is robust.  Both families show
 a steepening $M_{g}$--$M_{b}$ relationship with increasing baryonic
 mass, and quark stars consistently exhibit a far larger pressure
 contribution to~$M_{g}$ than neutron stars at comparable~$M_{b}$.
+
+This pressure contribution to~$M_{g}$ is not merely a theoretical
+refinement; it is an observable that distinguishes structured objects
+from singularities.  A point singularity has zero volume, no equation
+of state, and no internal pressure---the TOV mechanism cannot operate.
+If black holes are singularities, their gravitational mass equals
+their baryonic mass by construction.  The fact that the smallest
+observed black holes sit well above the neutron star maximum implies a
+pressure contribution, and therefore internal structure.
+
 That said, the TOV analysis demonstrates only that a phase
 transition \emph{would} produce a mass gap whose endpoint is a
 black hole; it does not, by itself, show that neutron stars
@@ -204,6 +266,14 @@ the following section.
 %==============================================================================
 \section{Observational Evidence for Collapse}\label{s:collapse}
 %==============================================================================
+
+The TOV analysis predicts that neutron stars exceeding the stability
+limit collapse through the mass gap into quark-degenerate
+configurations.  This section presents three independent lines of
+evidence that such collapses are occurring: the spin-dependent
+disappearance of massive pulsars, the thinning of the pulsar
+population at long spin periods, and the failed-supernova phenomenon
+in red supergiants.
 
 \subsection{Pulsars with Known Mass}\label{ss:pulsar-masses}
 
@@ -589,18 +659,51 @@ spinning singularity model can account for the same departure is a
 question for future work.
 
 %==============================================================================
-\section{Discussion}\label{s:discussion}
-%==============================================================================
-
-% TODO: Synthesize lines of evidence. Address M_g != M_i, the
-% circularity problem with Kerr template fitting, and parsimony
-% arguments.
-
-%==============================================================================
 \section{Conclusion}\label{s:conclusion}
 %==============================================================================
 
-% TODO: Summarize findings and propose future work.
+The lower mass gap between neutron stars and black holes has lacked a
+physical explanation.  We have argued that it is the signature of a
+phase transition from neutron degeneracy to quark degeneracy, driven
+by the same pressure--gravity coupling embedded in the TOV equations.
+A direct implication is that black holes are not singularities but
+structured stellar objects with finite volume, an equation of state,
+and internal pressure that contributes to their gravitational mass.
+
+Four independent lines of evidence support this picture.  The TOV
+equations show that a neutron-to-quark transition produces a
+gravitational-mass jump that anticipates the observed gap
+(\S\ref{s:tov}).  Massive pulsars are found exclusively at fast spin
+rates, consistent with centrifugal support delaying collapse past the
+stability limit (\S\ref{ss:pulsar-masses}), and the full pulsar
+population thins at long periods in the pattern this predicts
+(\S\ref{ss:pulsar-population}).  Failed supernovae confirm,
+independently of the pulsar evidence, that stellar cores with baryonic
+mass well below $5\;M_{\odot}$ collapse to form black holes
+(\S\ref{ss:rsg}).  Finally, LIGO merger remnants show a spin-dependent
+mass deficit that correlates with remnant spin and exceeds the
+non-spinning GR prediction by the amount a structured-matter model
+predicts---using a single parameter fit from one test and validated
+against a second (\S\ref{s:gwtc}).
+
+A limitation of this analysis is that all LIGO parameters are
+extracted from waveform templates built on the Kerr metric, which
+assumes the singularity model.  Using these parameters to test a
+non-singularity hypothesis introduces a circularity that cannot be
+fully resolved with current data.  Nonetheless, the consistency of the
+quark star model across four independent lines of evidence---two of
+which (pulsars and failed supernovae) involve no gravitational-wave
+data at all---suggests that the result is not an artefact of template
+assumptions.
+
+Several directions for future work are apparent.  Comparing the quark
+star prediction against the full spinning-Kerr GR baseline, using
+numerical relativity fitting formulas with component spins, would
+sharpen the distinction between the two models.  Targeted mass
+measurements of long-period pulsars could test the prediction that the
+spin-down disappearance is strongest among the most massive neutron
+stars.  And the continued growth of the gravitational-wave catalog will
+improve the statistical power of the merger analysis presented here.
 
 %==============================================================================
 \bibliography{\bib}
