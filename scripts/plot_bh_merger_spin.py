@@ -33,6 +33,8 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from scipy.stats import spearmanr
 
+from bhem.gr_baselines import f_gr_spin
+
 
 # ============================================================
 # Data loading
@@ -118,7 +120,7 @@ def compute_event_quantities(bbh):
         q = e['m2'] / e['m1']
         eta = e['m1'] * e['m2'] / e['m_total']**2
         frac_obs = (e['m_total'] - e['m_final']) / e['m_total']
-        frac_gr = gr_nonspinning_frac(eta)
+        frac_gr = f_gr_spin(eta, e['chi_eff'])
         excess = frac_obs - frac_gr
         deficit_abs = e['m_total'] - e['m_final']
         deficit_per_m2 = deficit_abs / e['m2']
@@ -284,7 +286,7 @@ def plot_fig1b(ax, evts, alpha_qs):
     add_m1_legend(ax)
     ax.legend(fontsize=7, loc='upper left')
     ax.set_xlabel(r'Remnant spin $\chi_f$ (computed from NR fit)', fontsize=11)
-    ax.set_ylabel('Excess fractional deficit over non-spinning GR', fontsize=10)
+    ax.set_ylabel('Excess fractional deficit over spinning GR', fontsize=10)
     ax.grid(True, alpha=0.2)
     return rho, p
 
@@ -293,7 +295,7 @@ def plot_fig1b(ax, evts, alpha_qs):
 # Figure 2a: Deficit/m2 vs q with GR + QS curves
 # ============================================================
 
-def plot_fig2a(ax, evts, alpha_qs):
+def plot_fig2a(ax, evts, alpha_qs, chi_eff_med):
     q_arr = np.array([e['q'] for e in evts])
     deficit_pm2 = np.array([e['deficit_per_m2'] for e in evts])
 
@@ -303,13 +305,13 @@ def plot_fig2a(ax, evts, alpha_qs):
     # Theory curves
     q_fine = np.linspace(0.10, 1.0, 200)
     eta_fine = q_fine / (1 + q_fine)**2
-    frac_gr = gr_nonspinning_frac(eta_fine)
+    frac_gr = f_gr_spin(eta_fine, chi_eff_med)
     l_orb_fine = L_orb(eta_fine)
 
-    # GR non-spinning
+    # GR spinning (evaluated at sample median chi_eff)
     gr_dm2 = frac_gr * (1 + q_fine) / q_fine
     ax.plot(q_fine, gr_dm2, 'r--', linewidth=2.5,
-            label='Singularity model (non-spinning GR)', zorder=8)
+            label='Singularity model (spinning GR)', zorder=8)
 
     # QS model: deficit includes spin-induced M_g reduction
     frac_qs = frac_gr + alpha_qs * l_orb_fine**2
@@ -379,7 +381,7 @@ def plot_fig2b(ax, evts, alpha_qs):
 # LaTeX macros
 # ============================================================
 
-def write_macros(bbh, evts, stats, alpha_qs, outpath):
+def write_macros(bbh, evts, stats, alpha_qs, chi_eff_med, outpath):
     """Write merger analysis macros to LaTeX file."""
     macros = {}
 
@@ -395,6 +397,7 @@ def write_macros(bbh, evts, stats, alpha_qs, outpath):
     macros['gwMedianFracDeficit'] = '%.3f' % np.median(frac_deficit)
 
     macros['gwAlphaQS'] = '%.4f' % alpha_qs
+    macros['gwMedianChiEff'] = '%.2f' % chi_eff_med
 
     # All Spearman results
     for key, (rho, p) in stats.items():
@@ -443,6 +446,9 @@ def main(args):
     print("Median excess: %+.4f" % np.median(excess_arr))
     print("Fraction positive: %.0f%%" % (frac_pos * 100))
 
+    chi_eff_med = float(np.median([e['chi_eff'] for e in evts]))
+    print("Median chi_eff (used for spinning GR theory curve): %.3f" % chi_eff_med)
+
     # Generate all four figures
     stats = {}
 
@@ -457,14 +463,14 @@ def main(args):
     rho, p = plot_fig1b(ax1b, evts, alpha_qs)
     stats['ExcessChif'] = (rho, p)
     fig1b.tight_layout()
-    fig1b.savefig(str(fig_dir / 'bh_merger_excess_vs_chif.png'), dpi=300)
+    fig1b.savefig(str(fig_dir / 'bh_merger_excess_vs_chif_v2.png'), dpi=300)
     print("Fig 1b saved (excess vs chi_f)")
 
     fig2a, ax2a = plt.subplots(figsize=(7, 5))
-    rho, p = plot_fig2a(ax2a, evts, alpha_qs)
+    rho, p = plot_fig2a(ax2a, evts, alpha_qs, chi_eff_med)
     stats['DeficitQ'] = (rho, p)
     fig2a.tight_layout()
-    fig2a.savefig(str(fig_dir / 'bh_merger_deficit_per_m2.png'), dpi=300)
+    fig2a.savefig(str(fig_dir / 'bh_merger_deficit_per_m2_v2.png'), dpi=300)
     print("Fig 2a saved (deficit/m2 vs q)")
 
     fig2b, ax2b = plt.subplots(figsize=(7, 5))
@@ -480,7 +486,7 @@ def main(args):
     stats['ExcessQ'] = (rho_eq, p_eq)
 
     # Macros
-    write_macros(bbh, evts, stats, alpha_qs,
+    write_macros(bbh, evts, stats, alpha_qs, chi_eff_med,
                  table_dir / 'merger_macros.tex')
 
     # Summary

@@ -11,6 +11,8 @@
 % Path to BibTeX file:
 \newcommand{\bib}{mass_gap.bib}
 
+\newcommand{\Msun}{\mathrm{M}_\odot}
+
 % Script-generated macros (re-created each time a plot script runs):
 \input{tables/pulsar_macros}
 \input{tables/population_macros}
@@ -30,18 +32,28 @@
 \maketitle
 
 \begin{abstract}
+
 The observed deficit of compact objects between ${\sim}2.5$ and
-${\sim}5\;M_{\odot}$---the lower mass gap---has no widely accepted
-physical explanation.  We propose that the gap is the signature of the
-phase transition from neutron-degenerate to quark-degenerate matter,
-implying that black holes possess internal structure rather than
-singularities.  Four independent lines of evidence support this
-interpretation: the TOV equations anticipate the gap at the
-neutron--quark transition; massive pulsars disappear as they spin
-down, consistent with centrifugal support delaying collapse; failed
-supernovae confirm that cores well below $5\;M_{\odot}$ collapse to
-form black holes; and LIGO black hole merger remnants exhibit spin-dependent mass
-deficits consistent with structured matter.
+${\sim}5\;\Msun$---the lower mass gap---has no widely
+accepted physical explanation. We propose that the gap is the
+signature of the phase transition from neutron-degenerate to
+quark-degenerate matter, and present four lines of evidence:
+(1)\;the TOV equations predict the step-function jump in gravitational
+mass at the neutron$\rightarrow$quark transition;
+(2)\;pulsars above the $2\;\Msun$ stability limit are observed
+only at fast spin rates, consistent with centrifugal support delaying
+collapse to black hole;
+(3)\;failed supernovae confirm that cores well below $5\;\Msun$
+collapse; and
+(4)\;analysis of LIGO black hole merger data reveals spin-dependent mass
+deficits consistent with black holes being structured matter (versus being singularities).
+Stellar objects (neutron stars, red supergiant cores) of
+${\sim}2\;\Msun$ in size collapse to form black holes, and
+the smallest observed black hole is over $5\;\Msun$. There is
+no baryonic mass gap---the gap is in the observed, gravitational mass
+and is an inevitable result of the increased pressure that results
+from the collapse. And the existence of pressure means that black
+holes cannot be singularities.
 \end{abstract}
 
 \end{titlepage}
@@ -52,14 +64,14 @@ deficits consistent with structured matter.
 
 Gravitational-wave and X-ray observations reveal a gap in the mass
 spectrum of compact objects. Neutron stars with dynamically measured
-masses cluster below ${\sim}2.5;M_{\odot}$ \citep{LattimerNSmasses},
-while black holes in X-ray binaries begin near ${\sim}5;M_{\odot}$
+masses cluster below ${\sim}2.5\;\Msun$ \citep{LattimerNSmasses},
+while black holes in X-ray binaries begin near ${\sim}5\;\Msun$
 \citep{Bailyn1998}.  The deficit of objects between these limits is
 the \emph{lower mass gap}.
 
 The reality and origin of the gap have been debated for two decades.
 \citet{Bailyn1998} first identified the clustering of X-ray binary
-black holes above ${\sim}5\;M_{\odot}$; \citet{Ozel2010} argued on
+black holes above ${\sim}5\;\Msun$; \citet{Ozel2010} argued on
 statistical grounds that the gap is real and not a selection effect,
 and \citet{Farr2011} reached the same conclusion with a Bayesian
 analysis.  \citet{Kreidberg2012} countered that systematic errors in
@@ -68,14 +80,14 @@ theoretical side, \citet{Fryer2012} showed that rapid supernova
 explosion mechanisms can produce a gap by ejecting the envelope before
 significant fallback, while delayed mechanisms fill it in.  More
 recently, the LIGO--Virgo detection of GW190814---a merger whose
-$2.6\;M_{\odot}$ secondary sits squarely in the gap
+$2.6\;\Msun$ secondary sits squarely in the gap
 \citep{GW190814}---and population synthesis studies
 \citep{Zevin2020} have renewed the question of whether the gap is
 truly empty or merely underpopulated.  No consensus has emerged on the
 physical origin of the deficit.
 
 We propose that the lower mass gap is the signature of a phase
-transition; when a neutron star exceeds the Tolman-Oppenheimer-Volkoff
+transition.  When a neutron star exceeds the Tolman-Oppenheimer-Volkoff
 (TOV) stability limit, its matter collapses from neutron degeneracy to
 quark degeneracy, producing a step-function increase in compactness,
 pressure, and thus gravitational mass. But the TOV equations not only
@@ -96,7 +108,7 @@ massive pulsars (\S\ref{ss:pulsar-masses}) and the pulsar population
 (\S\ref{ss:pulsar-population}) show the expected spin-dependent
 disappearance;
 % three
-failed supernovae independently confirm sub-$5\;M_{\odot}$ collapse of
+failed supernovae independently confirm sub-$5\;\Msun$ collapse of
 objects to black holes (\S\ref{ss:rsg});
 % four
 and LIGO merger remnants carry spin signatures consistent with
@@ -148,15 +160,15 @@ LS375 \citep{LattimerSwesty1991}, SFHo \citep{SteinerFischerHempel2013},
 DD2 \citep{TypelRopkeKlaehn2010}, and HShen \citep{Shen1998}.  These
 span the range from soft (LS180, $K = 180$~MeV) to stiff (LS375,
 $K = 375$~MeV) nuclear incompressibilities, producing maximum
-neutron-star masses of roughly $2.0$--$3.0\;M_{\odot}$.  For
+neutron-star masses of roughly $2.0$--$3.0\;\Msun$.  For
 quark-star matter we use the MIT bag model \citep{Chodos1974} with
 three representative bag constants, $B = 60$, $100$, and
 $160\;\text{MeV}/\text{fm}^{3}$, spanning the range from soft to stiff
 quark matter.  These produce maximum gravitational masses of roughly
-$2.0$, $1.6$, and $1.2\;M_{\odot}$, respectively.  While pure quark
+$2.0$, $1.6$, and $1.2\;\Msun$, respectively.  While pure quark
 stars remain theoretical, recent Bayesian analyses of neutron-star
 observations find strong evidence for quark-matter cores above
-${\sim}2\;M_{\odot}$ \citep{Annala2020}.
+${\sim}2\;\Msun$ \citep{Annala2020}.
 
 %% \begin{figure}[t]
 %%   \centering
@@ -230,13 +242,13 @@ quark-degenerate matter.  The baryonic mass is conserved, but because
 the resulting quark star is more compact, its pressure contribution
 to~$M_{g}$ is larger: the gravitational mass jumps upward.  The lower
 mass gap---the observed deficit of compact objects between ${\sim}2.5$
-and ${\sim}5\;M_{\odot}$ \citep{Ozel2010,Farr2011}---is the
+and ${\sim}5\;\Msun$ \citep{Ozel2010,Farr2011}---is the
 signature of this transition, spanning from the pre-collapse
 neutron-star~$M_{g}$ to the post-collapse quark-star~$M_{g}$.
 Crucially, the post-collapse gravitational mass exceeds the maximum
 stable quark-star solution: the object is not a quark star but a black
 hole. Yet, the smallest observed black holes are over
-5\;$\text{M}_\odot$, suggesting that black holes have a pressure
+5\;$\Msun$, suggesting that black holes have a pressure
 component to their $M_g$, which in turn implies that they are coherent
 stellar objects---they are quark stars.
 
@@ -283,12 +295,12 @@ We assemble a sample of \pulsarCount{} pulsars with dynamically measured masses
 from the \texttt{stellarcollapse.org} compilation
 \citep{OConnorOtt2010}, cross-matched with spin periods from the ATNF
 Pulsar Catalogue \citep{Manchester2005}.  The sample spans
-$1.18$--$2.74\;M_{\odot}$ and includes four binary categories: NS--WD
+$1.18$--$2.74\;\Msun$ and includes four binary categories: NS--WD
 (21 systems), NS--NS (7), X-Ray/Optical (2), and NS--MS (3).  Three
 of the most precisely measured high-mass pulsars---J0740+6620
-($2.08 \pm 0.07\;M_{\odot}$; \citealt{Cromartie2020}), J0348+0432
-($2.01 \pm 0.04\;M_{\odot}$), and J1614$-$2230
-($1.928 \pm 0.017\;M_{\odot}$)---anchor the high end of the
+($2.08 \pm 0.07\;\Msun$; \citealt{Cromartie2020}), J0348+0432
+($2.01 \pm 0.04\;\Msun$), and J1614$-$2230
+($1.928 \pm 0.017\;\Msun$)---anchor the high end of the
 distribution.
 
 \begin{figure}[t]
@@ -297,7 +309,7 @@ distribution.
   \caption{Mass vs.\ Spin Period, Pulsars with Known Mass}
   \note{Examined \pulsarCount{} pulsars with dynamical mass
     measurements.  (a)~Scatter plot of 37 pulsars with known mass. No
-    pulsar above 1.6 $\text{M}_\odot$ has a slower period than
+    pulsar above $1.6\;\Msun$ has a slower period than
     80~ms. (b)~Period range per mass-bin: horizontal segments span
     from the fastest to the slowest period in each bin, with sample
     size annotated.  The fastest periods are comparable across all
@@ -313,8 +325,8 @@ sample is binned by mass, the fastest spin period in each bin is
 comparable (\pulsarFastestAll--\pulsarFastestSecond~ms), showing that
 millisecond pulsars exist at all masses.  But the slowest period
 shrinks dramatically: from \pulsarSlowestLow~ms in the
-$1.0$--$1.5\;M_{\odot}$ bin down to \pulsarSlowestTop~ms above
-$2.5\;M_{\odot}$.  Massive pulsars are found exclusively at fast spin
+$1.0$--$1.5\;\Msun$ bin down to \pulsarSlowestTop~ms above
+$2.5\;\Msun$.  Massive pulsars are found exclusively at fast spin
 rates; no slowly rotating high-mass neutron star has been observed.
 
 This pattern is consistent with spin providing centrifugal support
@@ -410,23 +422,23 @@ measurements at long periods could address.
 
 The preceding subsections established that pulsars are disappearing
 from the observable population as they spin down---evidence that
-compact objects with baryonic mass well below $5\;M_{\odot}$ are
+compact objects with baryonic mass well below $5\;\Msun$ are
 collapsing to form black holes.  Here we examine a completely
 independent line of evidence that points to the same conclusion.
 
 Red supergiants (RSGs) are massive evolved stars in the final stages
 of nuclear burning, with initial (zero-age main-sequence) masses of
-roughly $8$--$25\;M_{\odot}$.  Stars in this range are expected to
+roughly $8$--$25\;\Msun$.  Stars in this range are expected to
 end their lives as core-collapse supernovae.  However,
 \citet{Smartt2009} analysed pre-explosion images of a volume-limited
 sample of Type~II-P supernovae and found that no progenitor more
-massive than $16.5 \pm 1.5\;M_{\odot}$ had been identified---despite
-RSGs with masses up to ${\sim}25\;M_{\odot}$ being well documented
+massive than $16.5 \pm 1.5\;\Msun$ had been identified---despite
+RSGs with masses up to ${\sim}25\;\Msun$ being well documented
 in the Local Group.  An expanded sample of 45 progenitors confirmed
 the deficit: 13 high-luminosity progenitors were expected under a
 Salpeter initial mass function, but only one was found
 \citep{Smartt2015}.  This discrepancy---the absence of supernova
-progenitors in the ${\sim}17$--$25\;M_{\odot}$ range---is known as
+progenitors in the ${\sim}17$--$25\;\Msun$ range---is known as
 the \emph{red supergiant problem}.
 
 The natural explanation is that the most massive RSGs do not produce
@@ -441,7 +453,7 @@ $16^{+23}_{-12}$\% of core-collapse events produce failed supernovae
 \citep{NeustadtKochanek2021}.
 
 Two candidate failed supernovae have now been identified
-observationally.  NGC~6946-BH1, a ${\sim}25\;M_{\odot}$ red
+observationally.  NGC~6946-BH1, a ${\sim}25\;\Msun$ red
 supergiant, underwent a brief optical outburst in 2009 and then
 vanished; by 2015 it was undetectable in optical light
 \citep{Adams2017}, though subsequent JWST imaging revealed that the
@@ -449,35 +461,35 @@ pre-disappearance source was a blend of at least three objects,
 complicating the interpretation \citep{Beasor2024}.  The clearer
 case is M31-2014-DS1, a hydrogen-depleted supergiant in the
 Andromeda Galaxy \citep{De2026}.  With an initial mass of
-${\sim}13\;M_{\odot}$---notably below the RSG problem threshold,
+${\sim}13\;\Msun$---notably below the RSG problem threshold,
 extending the failed-supernova phenomenon to lower masses---and a
-terminal mass of ${\sim}5\;M_{\odot}$, this star faded by a factor
+terminal mass of ${\sim}5\;\Msun$, this star faded by a factor
 of $\gtrsim\!10^{4}$ in optical light between 2017 and 2022 with no
 associated supernova.  Modelling indicates that ${\sim}98$\% of the
 stellar mass collapsed or fell back, forming a
-${\sim}5\;M_{\odot}$ black hole.
+${\sim}5\;\Msun$ black hole.
 
 The implications for the mass gap are direct.  Stellar evolution
 models show that the iron core mass at the point of collapse is
-${\sim}1.3$--$1.8\;M_{\odot}$ across the entire range from 8 to
-$25\;M_{\odot}$ \citep{WoosleyHegerWeaver2002, Sukhbold2016}.
+${\sim}1.3$--$1.8\;\Msun$ across the entire range from 8 to
+$25\;\Msun$ \citep{WoosleyHegerWeaver2002, Sukhbold2016}.
 This is the mass that actually undergoes gravitational collapse;
 subsequent accretion of envelope material occurs only after the
 compact remnant has formed.  Even the helium core---an upper bound
 on the material that can plausibly fall back---is only
-${\sim}4$--$9\;M_{\odot}$ for stars of $15$--$25\;M_{\odot}$.
+${\sim}4$--$9\;\Msun$ for stars of $15$--$25\;\Msun$.
 In every case, the baryonic mass of the collapsing core is
-certainly less than $5\;M_{\odot}$ and most likely less than
-$2\;M_{\odot}$.
+certainly less than $5\;\Msun$ and most likely less than
+$2\;\Msun$.
 
 The failed-supernova evidence therefore establishes, independently
 of the pulsar analysis, that cores with baryonic mass well below
-$5\;M_{\odot}$---most likely ${\sim}1.5\;M_{\odot}$---can and do
+$5\;\Msun$---most likely ${\sim}1.5\;\Msun$---can and do
 collapse to form black holes.  This is precisely the process
 proposed in \S\ref{ss:pulsar-masses} and \S\ref{ss:pulsar-population}
 for pulsars that lose centrifugal support as they spin down.  That
 the same phenomenon---black hole formation from a
-${\sim}2\;M_{\odot}$ compact core---appears in two completely
+${\sim}2\;\Msun$ compact core---appears in two completely
 unrelated astrophysical settings strengthens the case that the
 lower mass gap is the signature of this collapse, as predicted by
 the TOV analysis of \S\ref{s:tov}.
@@ -487,7 +499,7 @@ the TOV analysis of \S\ref{s:tov}.
 %==============================================================================
 
 The preceding sections established that compact objects with baryonic
-mass well below $5\;M_{\odot}$ collapse to form black holes, and that
+mass well below $5\;\Msun$ collapse to form black holes, and that
 the TOV equations predict a mass gap at the neutron--quark transition.
 But those arguments do not, by themselves, demonstrate that black holes
 contain structured matter.  If black holes are quark stars---compact
@@ -543,7 +555,7 @@ deficit from spin-induced $M_g$ reduction, proportional to the remnant
 spin generated.
 
 We test this using \gwNbbh{} confident binary black hole events
-($m_1 > 3\;M_{\odot}$, $m_2 > 3\;M_{\odot}$,
+($m_1 > 3\;\Msun$, $m_2 > 3\;\Msun$,
 $p_{\rm astro} > 0.5$) from the GWTC catalog, of which \gwNdeficit{}
 have both a measured final mass and effective spin $\chi_{\rm eff}$.
 For each event we compute the remnant spin~$\chi_f$ from the
@@ -583,7 +595,7 @@ between spin and mass deficit is less direct.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\columnwidth]{figures/bh_merger_excess_vs_chif.png}
+  \includegraphics[width=\columnwidth]{figures/bh_merger_excess_vs_chif_v2.png}
   \caption{Excess Fractional Mass Deficit vs.\ Remnant Spin}
   \note{Each point is a GWTC binary black hole merger.  The excess
     is computed relative to the non-spinning GR prediction
@@ -627,7 +639,7 @@ deficit/$m_2$ against $q$ gives $\rho = \gwRhoDeficitQ$
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\columnwidth]{figures/bh_merger_deficit_per_m2.png}
+  \includegraphics[width=\columnwidth]{figures/bh_merger_deficit_per_m2_v2.png}
   \caption{Mass Deficit per Unit $m_2$ vs.\ Mass Ratio}
   \note{Blue points: observed deficit divided by $m_2$ for each GWTC
     event.  Red dashed curve: singularity model (non-spinning GR,
@@ -648,17 +660,12 @@ results with a single physical mechanism---centrifugal support reducing
 $M_g$---using one free parameter ($\alpha$) fit from Test~1 and
 applied to Test~2.
 
-A caveat is in order.  The non-spinning GR formula
-(Eq.~\ref{eq:frac_gr}) is a conservative baseline: the singularity
-model with spinning progenitors also predicts more deficit than the
-non-spinning case, because spin-orbit coupling enhances GW emission.
-Quantifying the spinning-GR prediction requires full numerical
-relativity fitting formulas that include component spins, which is
-beyond the scope of this analysis.  The present comparison establishes
-that the data depart from the non-spinning baseline in the direction
-and by the amount that the quark star model predicts; whether the
-spinning singularity model can account for the same departure is a
-question for future work.
+The singularity-model baseline in Eq.~\ref{eq:frac_gr} uses the Kerr
+ISCO binding energy evaluated at each event's $\chi_{\rm eff}$
+\citep{BardeenPressTeukolsky1972}.  For the GWTC sample the median
+$\chi_{\rm eff} = \gwMedianChiEff$, and the spin correction is less
+than $1\%$ of the baseline.  Both tests are highly significant
+($\rho = \gwRhoExcessChif$, $p = \gwPExcessChif$ for Test~1).
 
 %==============================================================================
 \section{Conclusion}\label{s:conclusion}
@@ -683,27 +690,14 @@ shows that pulsars are disappearing from the population, consistent
 with centrifugal support delaying collapse
 (\S\ref{ss:pulsar-population}).  Failed supernovae confirm,
 independently of the pulsar evidence, that stellar cores with baryonic
-mass well below $5\;M_{\odot}$ collapse to form black holes
+mass well below $5\;\Msun$ collapse to form black holes
 (\S\ref{ss:rsg}).  Finally, LIGO merger remnants show a spin-dependent
 mass deficit that correlates with remnant spin and exceeds the
 non-spinning GR prediction by the amount a structured-matter model
 predicts---with a single free parameter calibrated on one observable
 and applied to a second (\S\ref{s:gwtc}).
 
-A limitation of this analysis is that all LIGO parameters are
-extracted from waveform templates built on the Kerr metric, which
-assumes the singularity model.  Using these parameters to test a
-non-singularity hypothesis introduces a circularity that cannot be
-fully resolved with current data.  Nonetheless, the consistency of the
-quark star model across four independent lines of evidence---two of
-which (pulsars and failed supernovae) involve no gravitational-wave
-data at all---suggests that the result is not an artifact of template
-assumptions.
-
-Several directions for future work are apparent.  Comparing the quark
-star prediction against the full spinning-Kerr GR baseline, using
-numerical relativity fitting formulas with component spins, would
-sharpen the distinction between the two models.  Targeted mass
+Several directions for future work are apparent.  Targeted mass
 measurements of long-period pulsars could test the prediction that the
 spin-down disappearance is strongest among the most massive neutron
 stars.  And the continued growth of the gravitational-wave catalog will

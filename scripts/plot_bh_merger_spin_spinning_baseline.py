@@ -26,7 +26,7 @@ where e_isco_kerr(a) = 1 - E_ISCO(a)/mu is the analytic Kerr ISCO
 binding energy (Bardeen, Press & Teukolsky 1972).  At chi_eff = 0 this
 reduces identically to f_GR_ns.
 
-Output figures (latex-paper/figures/):
+Output figures (results/):
     bh_merger_spinning_test1.png  -- excess vs chi_f, both baselines
     bh_merger_spinning_test2.png  -- deficit/m2 vs q, three model curves
 
@@ -335,7 +335,7 @@ def main(args):
     matplotlib.use('Agg' if args.no_show else 'TkAgg')
 
     base_dir = Path(__file__).resolve().parent.parent
-    fig_dir  = base_dir / 'latex-paper' / 'figures'
+    fig_dir  = base_dir / 'results'
     fig_dir.mkdir(parents=True, exist_ok=True)
 
     data_path = base_dir / 'data' / 'gwtc_catalog.csv'
