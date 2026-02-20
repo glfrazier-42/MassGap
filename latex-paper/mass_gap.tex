@@ -184,10 +184,10 @@ ${\sim}2\;\Msun$ \citep{Annala2020}.
 
 \begin{figure}[t]
 \subcaptionbox{Gravitational Mass vs. Radius\label{fig:tov_mr}}{
-  \includegraphics[scale=0.4]{figures/tov_mass_radius.png}
+  \includegraphics[width=0.5\linewidth]{figures/tov_mass_radius.png}
 }\hfill
 \subcaptionbox{Gravitational Mass vs. Baryonic Mass\label{fig:tov_mg_mb}}{
-  \includegraphics[scale=0.4]{figures/tov_mg_vs_mb.png}
+  \includegraphics[width=0.37\linewidth]{figures/tov_mg_vs_mb.png}
 }
 \caption{Neutron and Quark Star Stable Configurations}
 \note{Solid curves are the six nuclear EOS; the
@@ -542,17 +542,21 @@ since the 1970s---but they disagree on what is radiating.
 Both models predict that the mass deficit depends on the symmetric mass
 ratio $\eta = m_1 m_2 / (m_1 + m_2)^{2}$, because the orbital dynamics
 that govern both GW radiation and angular momentum transfer are
-controlled by~$\eta$.  We use the non-spinning GR prediction of
-\citet{BuonannoKidderLehner2008} as a baseline:
+controlled by~$\eta$.  We use the spinning-GR prediction as a
+baseline, extending \citet{BuonannoKidderLehner2008} by replacing the
+Schwarzschild ISCO binding energy with its Kerr analogue
+\citep{BardeenPressTeukolsky1972}:
 %
 \begin{equation}\label{eq:frac_gr}
-  f_{\rm GR} = 0.0572\,\eta + 0.498\,\eta^{2}\,.
+  f_{\rm GR}(\eta,\chi_{\rm eff})
+  = e_{\rm ISCO}(\chi_{\rm eff})\,\eta + 0.498\,\eta^{2}\,,
 \end{equation}
 %
-This represents the minimum deficit predicted by the singularity model
-(non-spinning progenitors).  The quark star model predicts additional
-deficit from spin-induced $M_g$ reduction, proportional to the remnant
-spin generated.
+where $e_{\rm ISCO}(\chi_{\rm eff})$ is the analytic Kerr ISCO binding
+energy fraction; at $\chi_{\rm eff}=0$ it equals $1-\sqrt{8/9}\approx
+0.0572$, recovering the BKL non-spinning formula.  The quark star model
+predicts additional deficit from spin-induced $M_g$ reduction,
+proportional to the remnant spin generated.
 
 We test this using \gwNbbh{} confident binary black hole events
 ($m_1 > 3\;\Msun$, $m_2 > 3\;\Msun$,
@@ -598,7 +602,7 @@ between spin and mass deficit is less direct.
   \includegraphics[width=\columnwidth]{figures/bh_merger_excess_vs_chif_v2.png}
   \caption{Excess Fractional Mass Deficit vs.\ Remnant Spin}
   \note{Each point is a GWTC binary black hole merger.  The excess
-    is computed relative to the non-spinning GR prediction
+    is computed relative to the spinning GR prediction
     (Eq.~\ref{eq:frac_gr}).  Points are coloured by primary mass
     $m_1$.  Remnant spin $\chi_f$ is computed from
     Eq.~\eqref{eq:chi_f}.  Red squares show binned medians.
@@ -612,8 +616,9 @@ between spin and mass deficit is less direct.
 
 Figure~\ref{fig:deficit_per_m2} plots the total mass deficit per unit
 $m_2$ against the mass ratio~$q$.  Two prediction curves are shown.
-The singularity model curve (red, dashed) uses the non-spinning GR
-formula (Eq.~\ref{eq:frac_gr}).  The quark star model curve (purple,
+The singularity model curve (red, dashed) uses the spinning GR
+formula (Eq.~\ref{eq:frac_gr}), evaluated at the sample median
+$\chi_{\rm eff} = \gwMedianChiEff$.  The quark star model curve (purple,
 solid) adds a spin-induced $M_g$ reduction proportional to the square
 of the orbital angular momentum deposited:
 $f_{\rm QS} = f_{\rm GR} + \alpha\,L_{\rm orb}(\eta)^{2}$,
@@ -642,8 +647,8 @@ deficit/$m_2$ against $q$ gives $\rho = \gwRhoDeficitQ$
   \includegraphics[width=\columnwidth]{figures/bh_merger_deficit_per_m2_v2.png}
   \caption{Mass Deficit per Unit $m_2$ vs.\ Mass Ratio}
   \note{Blue points: observed deficit divided by $m_2$ for each GWTC
-    event.  Red dashed curve: singularity model (non-spinning GR,
-    Eq.~\ref{eq:frac_gr}).  Purple solid curve: quark star model,
+    event.  Red dashed curve: singularity model (spinning GR,
+    Eq.~\ref{eq:frac_gr}, at median $\chi_{\rm eff}$).  Purple solid curve: quark star model,
     adding spin-induced $M_g$ reduction with $\alpha = \gwAlphaQS$
     fit from Test~1.  Green squares: binned medians.  The data
     follow the quark star prediction, not the singularity prediction
@@ -660,11 +665,7 @@ results with a single physical mechanism---centrifugal support reducing
 $M_g$---using one free parameter ($\alpha$) fit from Test~1 and
 applied to Test~2.
 
-The singularity-model baseline in Eq.~\ref{eq:frac_gr} uses the Kerr
-ISCO binding energy evaluated at each event's $\chi_{\rm eff}$
-\citep{BardeenPressTeukolsky1972}.  For the GWTC sample the median
-$\chi_{\rm eff} = \gwMedianChiEff$, and the spin correction is less
-than $1\%$ of the baseline.  Both tests are highly significant
+Both tests are highly significant
 ($\rho = \gwRhoExcessChif$, $p = \gwPExcessChif$ for Test~1).
 
 %==============================================================================
@@ -693,7 +694,7 @@ independently of the pulsar evidence, that stellar cores with baryonic
 mass well below $5\;\Msun$ collapse to form black holes
 (\S\ref{ss:rsg}).  Finally, LIGO merger remnants show a spin-dependent
 mass deficit that correlates with remnant spin and exceeds the
-non-spinning GR prediction by the amount a structured-matter model
+spinning GR prediction by the amount a structured-matter model
 predicts---with a single free parameter calibrated on one observable
 and applied to a second (\S\ref{s:gwtc}).
 

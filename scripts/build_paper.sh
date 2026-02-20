@@ -9,6 +9,4 @@ PYTHONPATH=src python scripts/plot_pulsar_population.py --no-show
 PYTHONPATH=src python scripts/plot_bh_merger_spin.py --no-show
 
 cd latex-paper
-# force the rebuild
-touch mass_gap.tex
 make

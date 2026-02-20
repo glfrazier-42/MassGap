@@ -106,7 +106,7 @@ def run_all(base_dir):
 
 def plot_mass_radius(results, outpath):
     """Figure 1: gravitational mass vs radius."""
-    fig, ax = plt.subplots(figsize=(7, 5))
+    fig, ax = plt.subplots(figsize=(4.0, 3.0))
 
     for name, d in results.items():
         if len(d['mg']) == 0:
@@ -120,9 +120,9 @@ def plot_mass_radius(results, outpath):
         ax.plot(d['r'][i_max], d['mg'][i_max], 'o', color=d['color'],
                 ms=5, zorder=5)
 
-    ax.set_xlabel(r'Radius (km)')
-    ax.set_ylabel(r'Gravitational mass $M_g\;(M_\odot)$')
-    ax.legend(fontsize=8, ncol=2)
+    ax.set_xlabel(r'Radius (km)', fontsize=9)
+    ax.set_ylabel(r'Gravitational mass $\text{M}_\text{g}\;(\text{M}_\odot)$', fontsize=9)
+    ax.legend(fontsize=8, ncol=1)
     ax.set_xlim(6, 22)
     ax.set_ylim(0, 3.5)
     ax.grid(True, alpha=0.25)
@@ -134,7 +134,7 @@ def plot_mass_radius(results, outpath):
 
 def plot_mg_vs_mb(results, outpath):
     """Figure 2: gravitational mass vs baryonic mass."""
-    fig, ax = plt.subplots(figsize=(7, 5))
+    fig, ax = plt.subplots(figsize=(3.0, 3.0))
 
     # reference line M_g = M_b
     mb_ref = np.linspace(0, 4, 200)
@@ -152,9 +152,9 @@ def plot_mg_vs_mb(results, outpath):
         ax.plot(d['mb'][i_max], d['mg'][i_max], 'o', color=d['color'],
                 ms=5, zorder=5)
 
-    ax.set_xlabel(r'Baryonic mass $M_b\;(M_\odot)$')
-    ax.set_ylabel(r'Gravitational mass $M_g\;(M_\odot)$')
-    ax.legend(fontsize=8, ncol=2)
+    ax.set_xlabel(r'Baryonic mass $\text{M}_\text{b}\;(\text{M}_\odot)$', fontsize=9)
+    ax.set_ylabel(r'Gravitational mass $\text{M}_\text{g}\;(\text{M}_\odot)$', fontsize=9)
+    # ax.legend(fontsize=8, ncol=2)
     ax.set_xlim(0, 3.5)
     ax.set_ylim(0, 3.5)
     ax.set_aspect('equal')
