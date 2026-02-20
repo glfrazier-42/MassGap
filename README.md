@@ -1,5 +1,9 @@
 # Mass Gap
 
+The pdf: [mass_gap.pdf](https://github.com/glfrazier-42/MassGap/blob/master/mass_gap.pdf)
+
+## Abstract
+
 The observed deficit of compact objects between ${\sim}2.5$ and
 ${\sim}5\;\text{M}_\odot$---the lower mass gap---has no widely
 accepted physical explanation. We propose that the gap is the
@@ -112,8 +116,6 @@ PYTHONPATH=src python scripts/population_survival_v2.py
 PYTHONPATH=src python scripts/run_bh_merger_spin.py
 ```
 
-On Windows/Cygwin, replace `python` with `venv/Scripts/python.exe`.
-
 ### Building the Paper
 
 ```bash
@@ -121,3 +123,9 @@ cd latex-paper && make
 ```
 
 This runs `pdflatex` and `bibtex` to produce `mass_gap.pdf`.
+
+There is a `scripts/build_paper.sh` convenience script.
+
+The above instructions were developed and tested on a
+Windows 11 PC with cygwin64, so you may have to
+adjust according to your compute environment.
