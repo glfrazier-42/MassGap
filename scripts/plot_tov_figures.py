@@ -121,7 +121,7 @@ def plot_mass_radius(results, outpath):
                 ms=5, zorder=5)
 
     ax.set_xlabel(r'Radius (km)', fontsize=9)
-    ax.set_ylabel(r'Gravitational mass $\text{M}_\text{g}\;(\text{M}_\odot)$', fontsize=9)
+    ax.set_ylabel(r'Gravitational mass $M_\text{g}\;(\text{M}_\odot)$', fontsize=9)
     ax.legend(fontsize=8, ncol=1)
     ax.set_xlim(6, 22)
     ax.set_ylim(0, 3.5)
@@ -152,8 +152,8 @@ def plot_mg_vs_mb(results, outpath):
         ax.plot(d['mb'][i_max], d['mg'][i_max], 'o', color=d['color'],
                 ms=5, zorder=5)
 
-    ax.set_xlabel(r'Baryonic mass $\text{M}_\text{b}\;(\text{M}_\odot)$', fontsize=9)
-    ax.set_ylabel(r'Gravitational mass $\text{M}_\text{g}\;(\text{M}_\odot)$', fontsize=9)
+    ax.set_xlabel(r'Baryonic mass $M_\text{b}\;(\text{M}_\odot)$', fontsize=9)
+    ax.set_ylabel(r'Gravitational mass $M_\text{g}\;(\text{M}_\odot)$', fontsize=9)
     # ax.legend(fontsize=8, ncol=2)
     ax.set_xlim(0, 3.5)
     ax.set_ylim(0, 3.5)

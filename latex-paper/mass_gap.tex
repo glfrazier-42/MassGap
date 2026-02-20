@@ -12,11 +12,14 @@
 \newcommand{\bib}{mass_gap.bib}
 
 \newcommand{\Msun}{\mathrm{M}_\odot}
+\newcommand{\Mg}{M_{\mathrm{g}}}
+\newcommand{\Mb}{M_{\mathrm{b}}}
 
 % Script-generated macros (re-created each time a plot script runs):
 \input{tables/pulsar_macros}
 \input{tables/population_macros}
 \input{tables/merger_macros}
+\input{tables/eta_confound_macros}
 
 \begin{document}
 
@@ -134,20 +137,20 @@ contains terms in which the pressure~$P$ itself contributes to the
 source of gravity.  As a consequence, the gravitational mass of a
 compact star---the mass that determines its orbit and gravitational
 field---exceeds its baryonic (rest) mass:
-$M_{g} > M_{b}$.
-We define $M_{g}$ as the total gravitational mass enclosed at the
-stellar surface.  The baryonic mass~$M_{b}$ is defined so as to
+$\Mg > \Mb$.
+We define $\Mg$ as the total gravitational mass enclosed at the
+stellar surface.  The baryonic mass~$\Mb$ is defined so as to
 isolate the ground-state structural energy of each matter type,
 excluding the internal kinetic energy that generates pressure.
-For neutron-star matter, $M_{b}$ is the integral of the baryon
+For neutron-star matter, $\Mb$ is the integral of the baryon
 rest-mass density~$\rho_{0}$ over coordinate volume---the mass the
 baryons would have if dispersed to infinity with zero internal energy.
-For quark-star matter, $M_{b}$ is the integral of the bag vacuum
+For quark-star matter, $\Mb$ is the integral of the bag vacuum
 energy density~$4B/c^{2}$ over coordinate volume---the QCD vacuum cost
 of creating the quark-matter volume, with no quark kinetic
 contribution.  Both definitions strip the internal energy that
 generates pressure and keep only the structural ground state.  The
-difference $M_{g} - M_{b}$ then measures pressure's contribution to
+difference $\Mg - \Mb$ then measures pressure's contribution to
 the gravitating mass for both matter types, and grows with
 compactness.
 
@@ -193,8 +196,8 @@ ${\sim}2\;\Msun$ \citep{Annala2020}.
 \note{Solid curves are the six nuclear EOS; the
     dashed curves are MIT bag model quark stars with
     $B = 60$, $100$, and $160\;\text{MeV}/\text{fm}^{3}$. For a given
-    baryonic mass $M_b$, quark stars have greater gravitational mass
-    $M_g$ than do neutron stars.
+    baryonic mass $\Mb$, quark stars have greater gravitational mass
+    $\Mg$ than do neutron stars.
 }
 \label{fig:tov_figs}
 \end{figure}
@@ -211,56 +214,56 @@ stable equilibrium exists.
 %% \begin{figure}[t]
 %%   \centering
 %%   \includegraphics[width=\columnwidth]{figures/tov_mg_vs_mb.png}
-%%   \caption{Gravitational Mass $M_g$ vs. Baryonic Mass $M_b$}
+%%   \caption{Gravitational Mass $\Mg$ vs. Baryonic Mass $\Mb$}
 %%   \note{Same set of
 %%     EOS as Fig.~\ref{fig:tov_mr}.  The dotted line is the Newtonian
-%%     limit $M_{g} = M_{b}$.  Neutron-star curves (solid) lie just above
-%%     this line, with pressure contributing ${\sim}10$--15\% of~$M_{g}$.
+%%     limit $\Mg = \Mb$.  Neutron-star curves (solid) lie just above
+%%     this line, with pressure contributing ${\sim}10$--15\% of~$\Mg$.
 %%     Quark-star curves (dashed) show dramatically larger separation;
 %%     their baryonic mass is defined via the bag vacuum energy~$4B/c^{2}$
 %%     alone, so that the ultrarelativistic quark kinetic energy
-%%     (which generates pressure) appears entirely in $M_{g} - M_{b}$.
+%%     (which generates pressure) appears entirely in $\Mg - \Mb$.
 %%     Filled circles mark the maximum-mass configuration.}
 %%   \label{fig:tov_mg_mb}
 %% \end{figure}
 
 The key result is shown in Figure~\ref{fig:tov_mg_mb}, which plots
-$M_{g}$ against~$M_{b}$.  Every TOV solution sits above the
-$M_{g} = M_{b}$ line; the departure grows with compactness.  The
+$\Mg$ against~$\Mb$.  Every TOV solution sits above the
+$\Mg = \Mb$ line; the departure grows with compactness.  The
 neutron-star curves (solid) hug the diagonal, with the pressure
-contribution amounting to ${\sim}10$--15\% of~$M_{g}$ at maximum mass.
+contribution amounting to ${\sim}10$--15\% of~$\Mg$ at maximum mass.
 The quark-star curves (dashed) depart dramatically: because the
 baryonic mass counts only the bag vacuum energy ($4B/c^{2}$), the
 entire ultrarelativistic quark kinetic energy ($3P/c^{2}$) appears as
 excess gravitational mass.  At the quark-star maximum,
-$M_{g}/M_{b} \sim 1.5$--2, meaning that pressure-generated energy
+$\Mg/\Mb \sim 1.5$--2, meaning that pressure-generated energy
 accounts for roughly half the gravitating mass.
 
 The implications for the mass gap are direct.  When a neutron star
 exceeds its TOV limit, it collapses from neutron-degenerate to
 quark-degenerate matter.  The baryonic mass is conserved, but because
 the resulting quark star is more compact, its pressure contribution
-to~$M_{g}$ is larger: the gravitational mass jumps upward.  The lower
+to~$\Mg$ is larger: the gravitational mass jumps upward.  The lower
 mass gap---the observed deficit of compact objects between ${\sim}2.5$
 and ${\sim}5\;\Msun$ \citep{Ozel2010,Farr2011}---is the
 signature of this transition, spanning from the pre-collapse
-neutron-star~$M_{g}$ to the post-collapse quark-star~$M_{g}$.
+neutron-star~$\Mg$ to the post-collapse quark-star~$\Mg$.
 Crucially, the post-collapse gravitational mass exceeds the maximum
 stable quark-star solution: the object is not a quark star but a black
 hole. Yet, the smallest observed black holes are over
 5\;$\Msun$, suggesting that black holes have a pressure
-component to their $M_g$, which in turn implies that they are coherent
+component to their $\Mg$, which in turn implies that they are coherent
 stellar objects---they are quark stars.
 
 The spread of EOS and bag constants in Fig.~\ref{fig:tov_figs}
 reflects current uncertainty in dense-matter physics; the precise
 behavior of matter at these densities is not yet known.
 Nonetheless, the qualitative picture is robust.  Both families show
-a steepening $M_{g}$--$M_{b}$ relationship with increasing baryonic
+a steepening $\Mg$--$\Mb$ relationship with increasing baryonic
 mass, and quark stars consistently exhibit a far larger pressure
-contribution to~$M_{g}$ than neutron stars at comparable~$M_{b}$.
+contribution to~$\Mg$ than neutron stars at comparable~$\Mb$.
 
-This pressure contribution to~$M_{g}$ is not merely a theoretical
+This pressure contribution to~$\Mg$ is not merely a theoretical
 refinement; it is an observable that distinguishes structured objects
 from singularities.  A point singularity has zero volume, no equation
 of state, and no internal pressure---the TOV mechanism cannot operate.
@@ -519,11 +522,11 @@ moment of inertia and no internal structure for centrifugal force to act
 upon.  In the quark star model, two physical objects collide and merge.
 The remnant is a spinning body with a moment of inertia, and its spin
 provides centrifugal support that reduces the internal pressure and
-therefore reduces the gravitational mass~$M_g$ relative to the conserved
-baryonic mass~$M_b$.  No baryonic mass is converted to energy---the
+therefore reduces the gravitational mass~$\Mg$ relative to the conserved
+baryonic mass~$\Mb$.  No baryonic mass is converted to energy---the
 gravitational-wave energy comes from the rotational kinetic energy of
 the inspiral---and the apparent mass deficit includes a spin-induced
-reduction in~$M_g$.
+reduction in~$\Mg$.
 
 The two models also differ in how they account for the gravitational
 waves observed after the merger (the ``ringdown'').  In the singularity
@@ -555,7 +558,7 @@ Schwarzschild ISCO binding energy with its Kerr analogue
 where $e_{\rm ISCO}(\chi_{\rm eff})$ is the analytic Kerr ISCO binding
 energy fraction; at $\chi_{\rm eff}=0$ it equals $1-\sqrt{8/9}\approx
 0.0572$, recovering the BKL non-spinning formula.  The quark star model
-predicts additional deficit from spin-induced $M_g$ reduction,
+predicts additional deficit from spin-induced $\Mg$ reduction,
 proportional to the remnant spin generated.
 
 We test this using \gwNbbh{} confident binary black hole events
@@ -584,18 +587,9 @@ $\Delta f$ against the computed remnant spin~$\chi_f$ for all
 \gwNdeficit{} events.  A Spearman rank correlation gives
 $\rho = \gwRhoExcessChif$ ($p = \gwPExcessChif$), a highly significant
 positive association.  The median excess is $\gwMedianExcess$, and
-\gwFracPositive{} of events exceed the non-spinning GR prediction.
+\gwFracPositive{} of events exceed the spinning GR prediction.
 The binned medians trace a clear rising curve from near zero at
 $\chi_f \approx 0.55$ to ${\sim}0.012$ at $\chi_f \approx 0.85$.
-
-The quark star model offers a direct physical mechanism for this
-correlation: a spinning body with internal structure experiences
-centrifugal support that reduces its central pressure and therefore
-its gravitational mass.  More remnant spin means more centrifugal
-support and a larger apparent mass deficit.  In the singularity model,
-the remnant's ``spin'' is a geometric property of the Kerr metric, with
-no internal structure for centrifugal force to act upon; the connection
-between spin and mass deficit is less direct.
 
 \begin{figure}[t]
   \centering
@@ -612,35 +606,14 @@ between spin and mass deficit is less direct.
   \label{fig:excess_vs_chif}
 \end{figure}
 
-\paragraph{Test 2: deficit per unit $m_2$ vs.\ mass ratio}
-
-Figure~\ref{fig:deficit_per_m2} plots the total mass deficit per unit
-$m_2$ against the mass ratio~$q$.  Two prediction curves are shown.
-The singularity model curve (red, dashed) uses the spinning GR
-formula (Eq.~\ref{eq:frac_gr}), evaluated at the sample median
-$\chi_{\rm eff} = \gwMedianChiEff$.  The quark star model curve (purple,
-solid) adds a spin-induced $M_g$ reduction proportional to the square
-of the orbital angular momentum deposited:
-$f_{\rm QS} = f_{\rm GR} + \alpha\,L_{\rm orb}(\eta)^{2}$,
-where $\alpha = \gwAlphaQS$ is fit from the excess-vs-$\chi_f$ data
-of Test~1.  Both curves are normalized by~$m_2$ to measure the deficit
-generated per solar mass of secondary, allowing comparison across
-mergers of different mass scales.
-
-The two curves have the same shape because both effects---GW radiation
-and spin deposition---are governed by the same orbital dynamics through
-$\eta$.  Equal-mass mergers maximize both GW emission and angular
-momentum transfer; lopsided mergers reduce both.  The quark star model
-shifts the curve upward by the spin-induced contribution, which is
-nearly constant in deficit/$m_2$ across all mass ratios because the
-decreasing $L_{\rm orb}^{2}$ at low~$q$ is offset by the increasing
-$1/m_2$ amplification.
-
-The binned medians (green squares) track the quark star model curve
-across the full range of mass ratios, sitting consistently above the
-singularity model prediction.  A Spearman correlation of the raw
-deficit/$m_2$ against $q$ gives $\rho = \gwRhoDeficitQ$
-($p = \gwPDeficitQ$).
+The quark star model offers a direct physical mechanism for this
+correlation: a spinning body with internal structure experiences
+centrifugal support that reduces its central pressure and therefore
+its gravitational mass.  More remnant spin means more centrifugal
+support and a larger apparent mass deficit.  In the singularity model,
+the remnant's ``spin'' is a geometric property of the Kerr metric, with
+no internal structure for centrifugal force to act upon; the connection
+between spin and mass deficit is less direct.
 
 \begin{figure}[t]
   \centering
@@ -649,31 +622,63 @@ deficit/$m_2$ against $q$ gives $\rho = \gwRhoDeficitQ$
   \note{Blue points: observed deficit divided by $m_2$ for each GWTC
     event.  Red dashed curve: singularity model (spinning GR,
     Eq.~\ref{eq:frac_gr}, at median $\chi_{\rm eff}$).  Purple solid curve: quark star model,
-    adding spin-induced $M_g$ reduction with $\alpha = \gwAlphaQS$
+    adding spin-induced $\Mg$ reduction with $\alpha = \gwAlphaQS$
     fit from Test~1.  Green squares: binned medians.  The data
     follow the quark star prediction, not the singularity prediction
     ($\rho = \gwRhoDeficitQ$, $p = \gwPDeficitQ$).}
   \label{fig:deficit_per_m2}
 \end{figure}
 
-Both tests point in the same direction.  The mass deficit in binary
-black hole mergers correlates strongly with the remnant spin
-(Test~1), and the observed deficit level matches the quark star
-prediction across all mass ratios while consistently exceeding the
-singularity prediction (Test~2).  The quark star model explains both
-results with a single physical mechanism---centrifugal support reducing
-$M_g$---using one free parameter ($\alpha$) fit from Test~1 and
-applied to Test~2.
+A natural concern is that the Test~1 correlation might partly reflect
+shared $\eta$-dependence: $\chi_f$ contains $L_{\rm orb}(\eta)$ and
+$f_{\rm GR}$ also depends on~$\eta$.  In the GWTC sample, however,
+$\chi_f$ is dominated by the progenitor spin component
+$\chi_{\rm eff}(1+q^2)/(1+q)^2$ (Spearman $\rho = \ecRhoChifSpinChif$
+with $\chi_f$) rather than by $L_{\rm orb}(\eta)$
+($\rho = \ecRhoChifOrbChif$).  More tellingly, $\eta$ is
+\emph{negatively} correlated with the excess
+($\rho = \ecRhoExcessEta$, $p = \ecPExcessEta$), so the $L_{\rm orb}$
+term dilutes rather than drives the Test~1 result.  Using the
+progenitor spin component alone yields a stronger correlation
+($\rho = \ecRhoExcessChifSpin$, $p = \ecPExcessChifSpin$); the partial
+Spearman correlation controlling for~$\eta$ gives
+$\rho = \ecRhoPartialChif$ ($p = \ecPPartialChif$); and the
+correlation is highly significant within each of three equal-sized
+$\eta$-tercile subsamples ($\rho \approx 0.45$--$0.55$ in each).
+There is no $\eta$-confound: the excess tracks progenitor spin, not
+mass-ratio geometry.
 
-Both tests are highly significant
-($\rho = \gwRhoExcessChif$, $p = \gwPExcessChif$ for Test~1).
+\paragraph{Test 2: deficit per unit $m_2$ vs.\ mass ratio}
+
+Figure~\ref{fig:deficit_per_m2} plots the total mass deficit per
+unit~$m_2$ against the mass ratio~$q$.  The singularity model curve
+(red, dashed) is the spinning GR baseline (Eq.~\ref{eq:frac_gr})
+evaluated at the sample median $\chi_{\rm eff} = \gwMedianChiEff$,
+normalised by~$m_2$.  The quark star model curve (purple, solid) adds
+the spin-induced $\Mg$ reduction,
+$f_{\rm QS} = f_{\rm GR} + \alpha\,L_{\rm orb}(\eta)^{2}$,
+using $\alpha = \gwAlphaQS$ taken directly from the Test~1 fit---a
+parameter-free prediction for Test~2.  Both curves share the same
+shape because GW radiation and spin deposition are both governed
+by~$\eta$; the quark star curve is shifted uniformly upward because
+the decreasing $L_{\rm orb}^{2}$ at low~$q$ is offset by the
+increasing $1/m_2$ amplification.
+
+The binned medians (green squares) track the quark star curve across
+the full range of mass ratios, sitting consistently above the
+singularity prediction ($\rho = \gwRhoDeficitQ$, $p = \gwPDeficitQ$).
+The quark star model thus accounts for both tests with one physical
+mechanism---centrifugal support reducing~$\Mg$---and one free
+parameter ($\alpha$) calibrated on Test~1 and applied unchanged to
+Test~2.
 
 %==============================================================================
 \section{Conclusion}\label{s:conclusion}
 %==============================================================================
 
 The lower mass gap between neutron stars and black holes has lacked a
-physical explanation.  We have argued that it is the signature of a
+physical explanation.  We have argued that there is no baryonic mass
+gap. The gap is in gravitational mass and is the signature of the
 phase transition from neutron degeneracy to quark degeneracy, driven
 by the same pressure--gravity coupling embedded in the TOV equations.
 A direct implication is that black holes are not singularities but

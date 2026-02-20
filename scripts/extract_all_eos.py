@@ -1,8 +1,11 @@
 """
 Extract cold beta-equilibrium slices from multiple stellarcollapse.org EOS tables.
 
-Reads HDF5 files from BlackHoleExplosionMechanism/data/eos_tables/ and
-writes 3-column text tables (rho, P, eps_specific) to MassGap/data/eos/.
+Reads HDF5 files from data/raw/ and writes 3-column text tables
+(rho, P, eps_specific) to data/eos/.
+
+See data/raw/README.md for the list of HDF5 files that must be downloaded
+from stellarcollapse.org before running this script.
 
 Usage:
     PYTHONPATH=src venv/Scripts/python.exe scripts/extract_all_eos.py
@@ -48,8 +51,7 @@ EOS_TABLES = {
 
 def main():
     base_dir   = Path(__file__).resolve().parent.parent
-    # HDF5 source files live in a sibling repo
-    h5_dir     = base_dir.parent / 'BlackHoleExplosionMechanism' / 'data' / 'eos_tables'
+    h5_dir     = base_dir / 'data' / 'raw'
     output_dir = base_dir / 'data' / 'eos'
     output_dir.mkdir(parents=True, exist_ok=True)
 

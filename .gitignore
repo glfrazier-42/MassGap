@@ -25,6 +25,9 @@ results/
 # Data (must be downloaded or generated)
 data/*
 !data/stellar_collapse_ns_masses.csv
+!data/raw/
+data/raw/*
+!data/raw/README.md
 
 # OS
 .DS_Store

@@ -29,7 +29,8 @@ quick:
 clean:
 	rm -f $(PAPER).aux $(PAPER).bbl $(PAPER).blg $(PAPER).log \
 	      $(PAPER).out $(PAPER).toc $(PAPER).fls $(PAPER).fdb_latexmk \
-	      $(PAPER).synctex.gz
+	      $(PAPER).synctex.gz \
+	      figures/* tables/*
 
 # Clean everything including PDF
 distclean: clean
