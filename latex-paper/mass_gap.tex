@@ -1,8 +1,8 @@
-\documentclass[letterpaper,11pt,leqno]{article}
-\usepackage{paper}
-\bibliographystyle{mass_gap}
+\documentclass[manuscript]{aastex701}
+\usepackage{amsmath,amssymb}
 \usepackage{dcolumn}
 \usepackage{booktabs}
+\usepackage{subcaption}
 \newcolumntype{d}[1]{D{.}{.}{#1}}
 
 % Paper title for PDF metadata:
@@ -15,6 +15,12 @@
 \newcommand{\Mg}{M_{\mathrm{g}}}
 \newcommand{\Mb}{M_{\mathrm{b}}}
 
+% Figure/table note command (descriptive paragraph below caption title)
+\newcommand{\note}[1]{\par\smallskip\footnotesize\itshape #1}
+
+% Run-in paragraph heading (used for Test 1, Test 2 in \S\ref{s:gwtc})
+\renewcommand{\paragraph}[1]{\par\medskip\noindent\textit{#1}.\ }
+
 % Script-generated macros (re-created each time a plot script runs):
 \input{tables/pulsar_macros}
 \input{tables/population_macros}
@@ -25,15 +31,11 @@
 
 \title{Quark Degeneracy and the Lower Mass Gap}
 
-\author{Gregory L. Frazier \thanks{Independent Researcher, Highland, Maryland, USA.}}
-
-\date{}
-
-\begin{titlepage}
-\maketitle
+\author[gname=Gregory,sname=Frazier]{Gregory L. Frazier}
+\affiliation{Independent Researcher, Highland, Maryland, USA.}
+\email[show]{glfrazier@alum.mit.edu}
 
 \begin{abstract}
-
 The observed deficit of compact objects between ${\sim}2.5$ and
 ${\sim}5\;\Msun$---the lower mass gap---has no widely
 accepted physical explanation. We propose that the gap is the
@@ -56,8 +58,6 @@ and is an inevitable result of the increased pressure that results
 from the collapse. And the existence of pressure means that black
 holes cannot be singularities.
 \end{abstract}
-
-\end{titlepage}
 
 %==============================================================================
 \section{Introduction}\label{s:introduction}
@@ -703,13 +703,11 @@ spin-down disappearance is strongest among the most massive neutron
 stars.  And the continued growth of the gravitational-wave catalog will
 improve the statistical power of the merger analysis presented here.
 
-%==============================================================================
-\section*{Acknowledgments}
-%==============================================================================
-
+\begin{acknowledgments}
 The author acknowledges the use of Claude (Anthropic) as an AI
 assistant in the development, analysis, and manuscript preparation of
 this work.
+\end{acknowledgments}
 
 %==============================================================================
 \section*{Data Availability}
@@ -723,6 +721,7 @@ equation-of-state tables from \texttt{stellarcollapse.org}
 \url{https://github.com/glfrazier-42/MassGap}.
 
 %==============================================================================
+\bibliographystyle{aasjournalv7}
 \bibliography{\bib}
 %==============================================================================
 
