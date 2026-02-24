@@ -11,7 +11,7 @@ signature of the phase transition from neutron-degenerate to
 quark-degenerate matter, and present four lines of evidence:
 
 1. The TOV equations predict the step-function jump in gravitational
-mass at the neutron $\rightarrow$ quark transition;
+mass at the neutron/quark transition;
 
 2. Pulsars above the $2M_\odot$ stability limit are observed
 only at fast spin rates, consistent with centrifugal support delaying
