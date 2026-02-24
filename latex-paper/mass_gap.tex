@@ -1,4 +1,4 @@
-\documentclass[manuscript]{aastex701}
+\documentclass[manuscript,linenumbers]{aastex701}
 \usepackage{amsmath,amssymb}
 \usepackage{dcolumn}
 \usepackage{booktabs}
@@ -22,14 +22,16 @@
 \renewcommand{\paragraph}[1]{\par\medskip\noindent\textit{#1}.\ }
 
 % Script-generated macros (re-created each time a plot script runs):
-\input{tables/pulsar_macros}
-\input{tables/population_macros}
-\input{tables/merger_macros}
-\input{tables/eta_confound_macros}
+\input{pulsar_macros}
+\input{population_macros}
+\input{merger_macros}
+\input{eta_confound_macros}
 
 \begin{document}
 
 \title{Quark Degeneracy and the Lower Mass Gap}
+\shorttitle{Quark Degeneracy and the Lower Mass Gap}
+\shortauthors{Frazier}
 
 \author[gname=Gregory,sname=Frazier]{Gregory L. Frazier}
 \affiliation{Independent Researcher, Highland, Maryland, USA.}
@@ -58,6 +60,9 @@ and is an inevitable result of the increased pressure that results
 from the collapse. And the existence of pressure means that black
 holes cannot be singularities.
 \end{abstract}
+
+\keywords{neutron stars, black holes, mass gap, quark stars, pulsars,
+  gravitational waves, black hole mergers}
 
 %==============================================================================
 \section{Introduction}\label{s:introduction}
@@ -173,7 +178,7 @@ ${\sim}2\;\Msun$ \citep{Annala2020}.
 
 %% \begin{figure}[t]
 %%   \centering
-%%   \includegraphics[width=\columnwidth]{figures/tov_mass_radius.png}
+%%   \includegraphics[width=\columnwidth]{tov_mass_radius.png}
 %%   \caption{Gravitational Mass vs Radius, Neutron and Quark Stars}
 %%   \note{Stable configurations. Solid curves are the six nuclear EOS; the
 %%     dashed curves are MIT bag model quark stars with
@@ -185,10 +190,10 @@ ${\sim}2\;\Msun$ \citep{Annala2020}.
 
 \begin{figure}[t]
 \subcaptionbox{Gravitational Mass vs. Radius\label{fig:tov_mr}}{
-  \includegraphics[width=0.5\linewidth]{figures/tov_mass_radius.png}
+  \includegraphics[width=0.5\linewidth]{tov_mass_radius.png}
 }\hfill
 \subcaptionbox{Gravitational Mass vs. Baryonic Mass\label{fig:tov_mg_mb}}{
-  \includegraphics[width=0.37\linewidth]{figures/tov_mg_vs_mb.png}
+  \includegraphics[width=0.37\linewidth]{tov_mg_vs_mb.png}
 }
 \caption{Neutron and Quark Star Stable Configurations}
 \note{Solid curves are the six nuclear EOS; the
@@ -211,7 +216,7 @@ stable equilibrium exists.
 
 %% \begin{figure}[t]
 %%   \centering
-%%   \includegraphics[width=\columnwidth]{figures/tov_mg_vs_mb.png}
+%%   \includegraphics[width=\columnwidth]{tov_mg_vs_mb.png}
 %%   \caption{Gravitational Mass $\Mg$ vs. Baryonic Mass $\Mb$}
 %%   \note{Same set of
 %%     EOS as Fig.~\ref{fig:tov_mr}.  The dotted line is the Newtonian
@@ -292,21 +297,21 @@ in red supergiants.
 
 \subsection{Pulsars with Known Mass}\label{ss:pulsar-masses}
 
-We assemble a sample of \pulsarCount{} pulsars with dynamically measured masses
-from the \texttt{stellarcollapse.org} compilation
-\citep{OConnorOtt2010}, cross-matched with spin periods from the ATNF
-Pulsar Catalogue \citep{Manchester2005}.  The sample spans
-$1.18$--$2.74\;\Msun$ and includes four binary categories: NS--WD
-(21 systems), NS--NS (7), X-Ray/Optical (2), and NS--MS (3).  Three
-of the most precisely measured high-mass pulsars---J0740+6620
-($2.08 \pm 0.07\;\Msun$; \citealt{Cromartie2020}), J0348+0432
-($2.01 \pm 0.04\;\Msun$), and J1614$-$2230
-($1.928 \pm 0.017\;\Msun$)---anchor the high end of the
+We assemble a sample of \pulsarCount{} pulsars with dynamically
+measured masses from the \texttt{stellarcollapse.org} compilation
+\citep{OConnorOtt2010}, cross-matched with spin periods from the
+Australia Telescope National Facility (ATNF) Pulsar Catalogue
+\citep{Manchester2005}.  The sample spans $1.18$--$2.74\;\Msun$ and
+includes four binary categories: NS--WD (21 systems), NS--NS (7),
+X-Ray/Optical (2), and NS--MS (3).  Three of the most precisely
+measured high-mass pulsars---J0740+6620 ($2.08 \pm 0.07\;\Msun$;
+\citealt{Cromartie2020}), J0348+0432 ($2.01 \pm 0.04\;\Msun$), and
+J1614$-$2230 ($1.928 \pm 0.017\;\Msun$)---anchor the high end of the
 distribution.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\columnwidth]{figures/pulsar_mass_period.png}
+  \includegraphics[width=\columnwidth]{pulsar_mass_period.png}
   \caption{Mass vs.\ Spin Period, Pulsars with Known Mass}
   \note{Examined \pulsarCount{} pulsars with dynamical mass
     measurements.  (a)~Scatter plot of 37 pulsars with known mass. No
@@ -364,10 +369,10 @@ be non-decreasing.
 
 \begin{figure}[t]
 \subcaptionbox{Density per log-decade\label{fig:pop_logbins}}{%
-  \includegraphics[scale=0.4]{figures/pulsar_population_logbins.png}%
+  \includegraphics[scale=0.4]{pulsar_population_logbins.png}%
 }\hfill
 \subcaptionbox{Fixed-width bins vs.\ model\label{fig:pop_linear}}{%
-  \includegraphics[scale=0.4]{figures/pulsar_population_linear.png}%
+  \includegraphics[scale=0.4]{pulsar_population_linear.png}%
 }
 \caption{Period Distribution of Normal Pulsars ($P \geq 100$~ms)}
 \note{(a)~Pulsars per log-decade in four logarithmically spaced bins.
@@ -536,13 +541,13 @@ axial symmetry.  Both models predict post-merger gravitational
 waves---quasi-normal modes have been a prediction of the Kerr model
 since the 1970s---but they disagree on what is radiating.
 
-Both models predict that the mass deficit depends on the symmetric mass
-ratio $\eta = m_1 m_2 / (m_1 + m_2)^{2}$, because the orbital dynamics
-that govern both GW radiation and angular momentum transfer are
-controlled by~$\eta$.  We use the spinning-GR prediction as a
+Both models predict that the mass deficit depends on the symmetric
+mass ratio $\eta = m_1 m_2 / (m_1 + m_2)^{2}$, because the orbital
+dynamics that govern both GW radiation and angular momentum transfer
+are controlled by~$\eta$.  We use the spinning-GR prediction as a
 baseline, extending \citet{BuonannoKidderLehner2008} by replacing the
-Schwarzschild ISCO binding energy with its Kerr analogue
-\citep{BardeenPressTeukolsky1972}:
+Schwarzschild innermost stable circular orbit (ISCO) binding energy
+with its Kerr analogue \citep{BardeenPressTeukolsky1972}:
 %
 \begin{equation}\label{eq:frac_gr}
   f_{\rm GR}(\eta,\chi_{\rm eff})
@@ -587,7 +592,7 @@ $\chi_f \approx 0.55$ to ${\sim}0.012$ at $\chi_f \approx 0.85$.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\columnwidth]{figures/bh_merger_excess_vs_chif_v2.png}
+  \includegraphics[width=\columnwidth]{bh_merger_excess_vs_chif_v2.png}
   \caption{Excess Fractional Mass Deficit vs.\ Remnant Spin}
   \note{Each point is a GWTC binary black hole merger.  The excess
     is computed relative to the spinning GR prediction
@@ -611,7 +616,7 @@ between spin and mass deficit is less direct.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\columnwidth]{figures/bh_merger_deficit_per_m2_v2.png}
+  \includegraphics[width=\columnwidth]{bh_merger_deficit_per_m2_v2.png}
   \caption{Mass Deficit per Unit $m_2$ vs.\ Mass Ratio}
   \note{Blue points: observed deficit divided by $m_2$ for each GWTC
     event.  Red dashed curve: singularity model (spinning GR,
@@ -718,7 +723,7 @@ catalogs: the ATNF Pulsar Catalogue \citep{Manchester2005}, the
 GWTC-3 gravitational-wave catalog \citep{GWTC3,GWOSC2023}, and
 equation-of-state tables from \texttt{stellarcollapse.org}
 \citep{OConnorOtt2010}. Analysis code is available at
-\url{https://github.com/glfrazier-42/MassGap}.
+https://github.com/glfrazier-42/MassGap.
 
 %==============================================================================
 \bibliographystyle{aasjournalv7}

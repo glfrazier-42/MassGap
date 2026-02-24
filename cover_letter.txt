@@ -1,0 +1,44 @@
+Dear Editors,
+
+I submit for consideration in The Astrophysical Journal Letters the
+manuscript "Quark Degeneracy and the Lower Mass Gap."
+
+The lower mass gap---the observed deficit of compact objects between
+roughly 2.5 and 5 solar masses---has lacked a physical explanation
+despite two decades of debate. This paper proposes that the gap is
+the signature of the phase transition from neutron-degenerate to
+quark-degenerate matter. I present four independent lines of evidence:
+
+1. The Tolman-Oppenheimer-Volkoff equations predict a gravitational-mass
+   jump at the neutron-to-quark transition that spans the observed gap;
+
+2. Pulsars of 2 to 2.5 M-sun are found exclusively at fast spin rates,
+   consistent with centrifugal support delaying collapse (i.e., obects
+   below 5 solar masses become black holes);
+
+3. Failed supernovae confirm that stellar cores well below 5 solar masses
+   collapse to black holes; and
+
+4. Analysis of LIGO binary black hole mergers in the GWTC catalog reveals
+   spin-dependent mass deficits that exceed spinning-GR predictions by
+   precisely the amount a structured-matter model predicts.
+
+A direct implication of this analysis is that black holes are not
+singularities but structured quark-degenerate objects---a conclusion
+required by, and consistent with, general relativity.
+
+We believe this work is appropriate for ApJL because it offers a
+unified physical explanation for a long-standing observational puzzle,
+draws on multiple independent datasets (gravitational-wave, pulsar, and
+stellar), and carries implications for the nature of black holes that
+are of broad interest across astrophysics.
+
+This manuscript is original, has not been previously published, and is
+not currently under review elsewhere. We are submitting under the Dual
+Anonymous Review option.
+
+Corresponding author:
+Gregory L. Frazier
+Independent Researcher, Highland, Maryland, USA
+glfrazier@alum.mit.edu
+
