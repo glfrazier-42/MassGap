@@ -5,7 +5,7 @@ The pdf: [mass_gap.pdf](https://github.com/glfrazier-42/MassGap/blob/master/mass
 ## Abstract
 
 The observed deficit of compact objects between ~2.5 and
-~5M${}_\odot$—the lower mass gap—has no widely
+~5M ${}_\odot$—the lower mass gap—has no widely
 accepted physical explanation. We propose that the gap is the
 signature of the phase transition from neutron-degenerate to
 quark-degenerate matter, and present four lines of evidence:
