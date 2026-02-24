@@ -126,10 +126,17 @@ def plot_range_chart(ax, df):
 
         ax.plot([p_min, p_max], [i, i], 'o-', color='#1f77b4',
                 lw=2.5, ms=7, solid_capstyle='round', zorder=3)
-        ax.annotate(r'$N=%d$' % n,
-                    xy=(p_max, i), xytext=(8, 0),
-                    textcoords='offset points', fontsize=8,
-                    va='center')
+        if i == 0:
+            # Longest line — place label above the midpoint to avoid clipping
+            ax.annotate(r'$N=%d$' % n,
+                        xy=(4*(p_min + p_max) / 5, i), xytext=(0, 8),
+                        textcoords='offset points', fontsize=8,
+                        ha='center', va='bottom')
+        else:
+            ax.annotate(r'$N=%d$' % n,
+                        xy=(p_max, i), xytext=(8, 0),
+                        textcoords='offset points', fontsize=8,
+                        va='center')
 
     ax.set_yticks(y_positions)
     ax.set_yticklabels([lbl + r' $M_\odot$' for lbl in BIN_LABELS])
