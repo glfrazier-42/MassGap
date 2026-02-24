@@ -4,8 +4,8 @@ The pdf: [mass_gap.pdf](https://github.com/glfrazier-42/MassGap/blob/master/mass
 
 ## Abstract
 
-The observed deficit of compact objects between ${\sim}2.5$ and
-${\sim}5\;\text{M}_\odot$---the lower mass gap---has no widely
+The observed deficit of compact objects between ~2.5 and
+~5M${}_\odot$—the lower mass gap—has no widely
 accepted physical explanation. We propose that the gap is the
 signature of the phase transition from neutron-degenerate to
 quark-degenerate matter, and present four lines of evidence:
@@ -13,20 +13,20 @@ quark-degenerate matter, and present four lines of evidence:
 1. The TOV equations predict the step-function jump in gravitational
 mass at the neutron$\rightarrow$quark transition;
 
-2. Pulsars above the $2\;\text{M}_\odot$ stability limit are observed
+2. Pulsars above the 2M${}_\odot$ stability limit are observed
 only at fast spin rates, consistent with centrifugal support delaying
 collapse to black hole;
 
-3. Failed supernovae confirm that cores well below $5\;\text{M}_{\odot}$
+3. Failed supernovae confirm that cores well below 5M${}_\odot$
 collapse; and
 
 4. Analysis of LIGO black hole merger data reveals spin-dependent mass
 deficits consistent with black holes being structured matter (versus being singularities).
 
 Stellar objects (neutron stars, red supergiant cores) of
-${\sim}2\;\text{M}_\odot$ in size collapse to form black holes, and
-the smallest observed black hole is over $5\;\text{M}_\odot$. There is
-no baryonic mass gap---the gap is in the observed, gravitational mass
+~2M${}_\odot$ in size collapse to form black holes, and
+the smallest observed black hole is over 5M${}_\odot$. There is
+no baryonic mass gap—the gap is in the observed, gravitational mass
 and is an inevitable result of the increased pressure that results
 from the collapse. And the existence of pressure means that black
 holes cannot be singularities.
