@@ -92,8 +92,10 @@ def write_latex_macros(df, outpath):
     print("Wrote %d macros to %s" % (len(macros), outpath))
 
 
-def plot_scatter(ax, df):
-    """Panel (a): mass vs period scatter plot."""
+def plot_scatter(df, outpath):
+
+    fig, ax = plt.subplots(1, 1, figsize=(4, 3))
+
     ax.scatter(df['period_ms'], df['mass'],
                c=SCATTER_COLOR, marker=SCATTER_MARKER,
                s=40, zorder=3, edgecolors='k', linewidths=0.4)
@@ -108,11 +110,17 @@ def plot_scatter(ax, df):
     ax.set_xlabel('Spin period (ms)')
     ax.set_ylabel(r'Mass ($M_\odot$)')
     ax.grid(True, alpha=0.25)
-    ax.set_title('(a)', loc='left', fontsize=10, fontweight='bold')
+    fig.tight_layout()
+    fig.savefig(str(outpath), dpi=300)
+    print("  Saved %s" % outpath)
+    return fig
 
 
-def plot_range_chart(ax, df):
+def plot_range_chart(df, outpath):
     """Panel (b): period range per mass bin."""
+
+    fig, ax = plt.subplots(1, 1, figsize=(4, 3))
+
     y_positions = np.arange(len(MASS_BINS))
 
     for i, ((m_lo, m_hi), label) in enumerate(zip(MASS_BINS, BIN_LABELS)):
@@ -142,7 +150,10 @@ def plot_range_chart(ax, df):
     ax.set_yticklabels([lbl + r' $M_\odot$' for lbl in BIN_LABELS])
     ax.set_xlabel('Spin period (ms)')
     ax.grid(True, alpha=0.25, axis='x')
-    ax.set_title('(b)', loc='left', fontsize=10, fontweight='bold')
+    fig.tight_layout()
+    fig.savefig(str(outpath), dpi=300)
+    print("  Saved %s" % outpath)
+    return fig
 
 
 # ---------- main ----------
@@ -165,15 +176,12 @@ def main(args):
                   % (label, len(sub), sub['period_ms'].min(),
                      sub['period_ms'].max()))
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.5))
+    # fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.5))
 
-    plot_scatter(ax1, df)
-    plot_range_chart(ax2, df)
-
-    fig.tight_layout()
-    outpath = fig_dir / 'pulsar_mass_period.png'
-    fig.savefig(str(outpath), dpi=300)
-    print("\nSaved %s" % outpath)
+    # plot_scatter(ax1, df)
+    # plot_range_chart(ax2, df)
+    plot_scatter(df, fig_dir / 'pulsar_mass_scatter')
+    plot_range_chart(df, fig_dir / 'pulsar_mass_bins')
 
     # Write LaTeX macros
     table_dir = base_dir / 'latex-paper' / 'tables'

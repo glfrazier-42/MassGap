@@ -134,7 +134,7 @@ def plot_mass_radius(results, outpath):
 
 def plot_mg_vs_mb(results, outpath):
     """Figure 2: gravitational mass vs baryonic mass."""
-    fig, ax = plt.subplots(figsize=(3.0, 3.0))
+    fig, ax = plt.subplots(figsize=(4.0, 3.0))
 
     # reference line M_g = M_b
     mb_ref = np.linspace(0, 4, 200)
@@ -157,7 +157,7 @@ def plot_mg_vs_mb(results, outpath):
     # ax.legend(fontsize=8, ncol=2)
     ax.set_xlim(0, 3.5)
     ax.set_ylim(0, 3.5)
-    ax.set_aspect('equal')
+    # ax.set_aspect('equal')
     ax.grid(True, alpha=0.25)
     fig.tight_layout()
     fig.savefig(str(outpath), dpi=300)

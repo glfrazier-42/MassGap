@@ -729,6 +729,7 @@ def main():
     # Panel 1: chi_eff vs m1
     ax = axes[0, 0]
     m1_plot = np.array([e['m1'] for e in with_chi])
+    m2_plot = np.array([e['m2'] for e in with_chi])
     chi_plot = np.array([e['chi_eff'] for e in with_chi])
     chi_lo_plot = np.array([abs(safe_float(e.get('chi_eff_lower', np.nan)))
                             for e in with_chi
@@ -736,6 +737,10 @@ def main():
     chi_hi_plot = np.array([abs(safe_float(e.get('chi_eff_upper', np.nan)))
                             for e in with_chi
                             if not np.isnan(e['chi_eff'])])
+
+    m1_min = min(m1_plot)
+    m2_min = min(m2_plot)
+    print(f"m1_min={m1_min}, m2_min={m2_min}")
 
     # Color by mass bin
     colors = np.where(m1_plot >= 65, 'red',
