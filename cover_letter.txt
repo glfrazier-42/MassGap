@@ -1,6 +1,6 @@
 Dear Editors,
 
-I submit for consideration in The Astrophysical Journal Letters the
+I submit for consideration by Physical Review Letters the
 manuscript "Quark Degeneracy and the Lower Mass Gap."
 
 The lower mass gap---the observed deficit of compact objects between
@@ -27,15 +27,15 @@ A direct implication of this analysis is that black holes are not
 singularities but structured quark-degenerate objects---a conclusion
 required by, and consistent with, general relativity.
 
-We believe this work is appropriate for ApJL because it offers a
+I believe this work is appropriate for PRL because it offers a
 unified physical explanation for a long-standing observational puzzle,
 draws on multiple independent datasets (gravitational-wave, pulsar, and
 stellar), and carries implications for the nature of black holes that
 are of broad interest across astrophysics.
 
+
 This manuscript is original, has not been previously published, and is
-not currently under review elsewhere. We are submitting under the Dual
-Anonymous Review option.
+not currently under review elsewhere.
 
 Corresponding author:
 Gregory L. Frazier
